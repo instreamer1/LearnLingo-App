@@ -1,0 +1,74 @@
+.container {
+  padding-left: 64px;
+  padding-right: 64px;
+}
+.heroSection {
+  margin-top: 20px;
+  margin-bottom: 24px;
+  display: flex;
+  gap: 24px;
+}
+
+.startedWrapper {
+  border-radius: 30px;
+  width: 720px;
+  height: 530px;
+  padding-left: 64px;
+  padding-top: 98px;
+  padding-bottom: 98px;
+  background-color: #f8f8f8;
+}
+
+.homePageTitle {
+  font-weight: 500;
+  width: 548px;
+  font-size: 48px;
+  line-height: 1.17;
+  letter-spacing: -0.02em;
+  color: #121417;
+  margin-bottom: 32px;
+}
+
+.homePageSpan {
+  font-style: italic;
+  font-weight: 400;
+  border-radius: 12px;
+  background-color: #fbe9ba;
+  margin-left: 8px;
+}
+
+.homePageDesc {
+  width: 471px;
+  margin-bottom: 64px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.37;
+  letter-spacing: -0.02em;
+  color: #121417;
+}
+
+.btnWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.getStartedLink {
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.56;
+  border-radius: 12px;
+  padding: 8px 0;
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s;
+  width: 160px;
+  color: #121417;
+  background-color: #f4c550;
+}
+
+.visualWrapper {
+  width: 568px;
+}
