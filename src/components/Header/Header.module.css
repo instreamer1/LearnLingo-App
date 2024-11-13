@@ -1,24 +1,35 @@
 .header {
-  display: grid;
+  /* display: grid;
   grid-template-columns: 661px 1fr;
   grid-template-columns: 1fr auto;
-  align-items: center;
+  align-items: center; */
   height: 48px;
+  padding-left: 128px;
+  padding-right: 128px;
   margin-top: 20px;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
   background: #fff;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 661px 1fr;
 }
 
 .logoContainer {
   display: grid;
+  /* grid-template-columns: 36px 97px 1fr ; */
   grid-template-columns: auto auto 1fr;
-  grid-template-rows: 1fr;
   align-items: center;
-  justify-items: center;
-  gap: 8px;
+  /* justify-content:end; */
+}
+
+.logoContainer > :last-child {
+  justify-self: end;
 }
 
 .logo {
+  margin-right: 8px;
 }
 
 .nav {
@@ -29,6 +40,4 @@
   letter-spacing: -0.02em;
   color: #121417;
 }
-.navContainer {
-  justify-self: end;
-}
+

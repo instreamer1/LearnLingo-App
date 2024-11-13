@@ -1,0 +1,166 @@
+.card {
+  display: flex;
+  gap: 48px;
+  border-radius: 24px;
+  padding: 24px;
+  /* width: 1184px; */
+  min-height: 328px;
+  background: #fff;
+}
+
+.avatarWrapper {
+  position: relative;
+  border: 3px solid #fbe9ba;
+  border-radius: 100px;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatarPhoto {
+  border-radius: 100px;
+  width: 96px;
+  object-fit: cover;
+}
+
+.onlineStatus {
+  position: absolute;
+  top: 19px;
+  right: 23px;
+  transform: translate(50%);
+  background: #38cd3e;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  width: 12px;
+  height: 12px;
+  fill: #38cd3e;
+}
+
+.cardBody {
+  flex: 1;
+  /* width: 968px; */
+}
+
+.cardWrapper {
+  display: flex;
+  /* gap: 149px; */
+  height: 56px;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+
+.cardHeader {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.languages,
+.speaks {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  color: #8a8a89;
+}
+
+.name {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 100%;
+  color: #121417;
+}
+
+.cardLessonWrapper {
+  display: flex;
+  align-items: start;
+  gap: 64px;
+}
+.cardLesson {
+  display: flex;
+  gap: 32px;
+}
+
+.iconBook {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+}
+
+.iconBook > use {
+  width: 16px;
+  height: 16px;
+}
+.iconStar {
+  width: 16px;
+  height: 16px;
+  fill: #ffc531;
+  stroke: 1.2px solid #ffc531;
+  margin-right: 8px;
+}
+
+.cardLesson > li {
+  display: flex;
+  align-items: center;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  color: #121417;
+}
+
+.favoriteButton {
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
+}
+
+.iconHart {
+  width: 100%;
+  height: 100%;
+  stroke-width: 2px;
+  stroke: #121417;
+}
+
+.languages,
+.speaks,
+.lessonInfo {
+ margin-bottom: 8px;
+}
+.conditions {
+  margin-bottom: 16px;
+ }
+
+
+.speaks  span {
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  color: #121417;
+}
+
+.readMore {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  color: #121417;
+}
+
+.tags {
+  margin-top: 10px;
+}
+
+.tag {
+  display: inline-block;
+  background: #f1f1f1;
+  border-radius: 12px;
+  padding: 5px 10px;
+  margin: 5px 5px 0 0;
+  font-size: 0.9em;
+}

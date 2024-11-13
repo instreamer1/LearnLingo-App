@@ -7,13 +7,14 @@ const Header = () => {
   return (
     <>
       <div className={css.header}>
-        <div className={css.logoContainer}>
-          <img src={logo} alt="" className={css.logo} />
-          <a href="/" className={css.nav}>LearnLingo</a>
-
-          <Navigation />
-        </div>
-        <div className="navContainer">
+        <div className={css.container}>
+          <div className={css.logoContainer}>
+            <img src={logo} alt="" className={css.logo} />
+            <a href="/" className={css.nav}>
+              LearnLingo
+            </a>
+            <Navigation />
+          </div>
           <AuthNav />
         </div>
       </div>

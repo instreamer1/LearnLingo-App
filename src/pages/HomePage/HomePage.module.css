@@ -1,29 +1,33 @@
+.hero {
+  padding-top: 20px;
+  padding-bottom: 32px;
+}
+
 .container {
   padding-left: 64px;
   padding-right: 64px;
 }
+
 .heroSection {
-  margin-top: 20px;
-  margin-bottom: 24px;
   display: flex;
   gap: 24px;
+  margin-bottom: 24px;
 }
 
 .startedWrapper {
   border-radius: 30px;
   width: 720px;
   height: 530px;
-  padding-left: 64px;
-  padding-top: 98px;
-  padding-bottom: 98px;
+  padding: 98px 108px 98px 64px;
+
   background-color: #f8f8f8;
 }
 
 .homePageTitle {
+  font-family: var(--font-family);
   font-weight: 500;
-  width: 548px;
   font-size: 48px;
-  line-height: 1.17;
+  line-height: 117%;
   letter-spacing: -0.02em;
   color: #121417;
   margin-bottom: 32px;
@@ -40,35 +44,71 @@
 .homePageDesc {
   width: 471px;
   margin-bottom: 64px;
+  font-family: var(--font-family);
   font-weight: 400;
   font-size: 16px;
-  line-height: 1.37;
+  line-height: 137%;
   letter-spacing: -0.02em;
   color: #121417;
 }
 
-.btnWrapper {
-  display: flex;
-  justify-content: center;
-}
-
-.getStartedLink {
-  font-family: inherit;
+.getStarted {
+  border-radius: 12px;
+  width: 267px;
+  height: 60px;
+  background: #f4c550;
+  font-family: var(--font-family);
   font-weight: 700;
   font-size: 18px;
-  line-height: 1.56;
-  border-radius: 12px;
-  padding: 8px 0;
-  position: relative;
-  display: inline-block;
-  cursor: pointer;
-  text-align: center;
-  transition: all 0.2s;
-  width: 160px;
+  line-height: 156%;
   color: #121417;
-  background-color: #f4c550;
+  transition: background 0.3s ease-in-out;
+}
+
+.getStarted:hover {
+  background: #ffdc86;
 }
 
 .visualWrapper {
   width: 568px;
+}
+
+.tutorsInfo {
+  display: flex;
+  justify-content: space-between;
+  border: 1.5px dashed #f4c550;
+  border-radius: 30px;
+  width: 1312px;
+  height: 116px;
+  padding: 40px 123px;
+}
+
+.tutorsBlock {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.firstText {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 114%;
+  letter-spacing: -0.02em;
+  color: #121417;
+  margin-right: 16px;
+}
+
+.secondText {
+  max-width: 96px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.02em;
+  color: rgba(18, 20, 23, 0.7);
+}
+
+.secondParagraphAdd {
+  width: 74px;
 }
