@@ -1,4 +1,9 @@
+section{
+    
+}
+
 .container {
     padding-left: 128px;
     padding-right: 128px;
+    background: #f8f8f8;
 }

@@ -33,9 +33,8 @@ const TeacherCard = () => {
             <h2 className={css.name}>Jane Smith</h2>
           </div>
           <div className={css.cardLessonWrapper}>
-            <ul className={css.cardLesson}>
+            {/* <ul className={css.cardLesson}>
               <li>
-                {" "}
                 <svg className={css.iconBook}>
                   <use href={`${iconSprite}#icon-book`}></use>
                 </svg>{" "}
@@ -49,6 +48,26 @@ const TeacherCard = () => {
                 Rating: 4.8
               </li>
               <li>| Price / 1 hour: $30</li>
+            </ul> */}
+            <ul className={css.cardLesson}>
+              <li className={`${css.cardItem} ${css.withLine}`}>
+                <svg className={css.iconBook}>
+                  <use href={`${iconSprite}#icon-book`}></use>
+                </svg>
+                Lessons online
+              </li>
+              <li className={`${css.cardItem} ${css.withLine}`}>
+                Lessons done: 1098
+              </li>
+              <li className={`${css.cardItem} ${css.withLine}`}>
+                <svg className={css.iconStar}>
+                  <use href={`${iconSprite}#icon-star`}></use>
+                </svg>
+                Rating: 4.8
+              </li>
+              <li className={css.cardItem}>
+                Price / 1 hour: $30
+              </li>
             </ul>
 
             <button
@@ -70,20 +89,22 @@ const TeacherCard = () => {
           Speaks: <span>German, French</span>
         </p>
         <p className={css.lessonInfo}>
-          Lesson Info: Lessons are structured to cover grammar, vocabulary, and
-          practical usage of the language.
+          Lesson Info: <span>Lessons are structured to cover grammar, vocabulary, and
+          practical usage of the language.</span>
         </p>
         <p className={css.conditions}>
-          Conditions: Welcomes both adult learners and teenagers (13 years and
-          above). Provides personalized study plans.
+          Conditions: <span>Welcomes both adult learners and teenagers (13 years and
+          above). Provides personalized study plans.</span>
         </p>
-        {!showReadMore &&(<button
-          className={css.readMore}
-          type="button"
-          onClick={handleClickReadMore}
-        >
-          Read more
-        </button>)}
+        {!showReadMore && (
+          <button
+            className={css.readMore}
+            type="button"
+            onClick={handleClickReadMore}
+          >
+            Read more
+          </button>
+        )}
         {/* <a href="#" className={css.readMore}>
           Read more
         </a> */}
@@ -101,8 +122,28 @@ const TeacherCard = () => {
               needs and learning styles of her students, ensuring that they feel
               supported and motivated throughout their language journey.
             </p>
-            <ul className="feedback">
-              <li></li>
+            <ul className={css.reviewsList}>
+              <li className={css.reviewsListItem}>
+                <div className={css.reviewsWrapper}>
+                  <img
+                    src={avatar}
+                    alt="User avatar"
+                    className={css.reviewsPhoto}
+                  />
+                  <div className={css.reviewsUser}>
+                    <p className={css.reviewsUserName}>Frank</p>
+                    <div className={css.reviewsUserStars}>
+                      <svg className={css.iconReviewsStar}>
+                        <use href={`${iconSprite}#icon-star`}></use>
+                      </svg>
+                      <p className={css.reviewsUserRating}>4.8</p>
+                    </div>
+                  </div>
+                </div>
+                <p className={css.reviewsUserFeedback}>
+                  Jane's lessons were very helpful. I made good progress.
+                </p>
+              </li>
             </ul>
           </div>
         )}
