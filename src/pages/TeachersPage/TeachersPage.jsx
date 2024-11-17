@@ -2,7 +2,7 @@ import FilterSelector from "../../components/FilterSelector/FilterSelector";
 import TeacherCard from "../../components/TeacherCard/TeacherCard";
 import css from "./TeachersPage.module.css";
 
-function TeachersPage() {
+const TeachersPage = () => {
   return (
     <>
       <section>

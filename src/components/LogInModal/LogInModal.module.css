@@ -1,0 +1,73 @@
+.wrapper {
+  width: 438px;
+  height: 100%;
+ }
+
+.logInTitle {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+  width: 100%;
+  color: #121417;
+}
+
+.logInDesc {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.37;
+  margin-bottom: 40px;
+  color: rgba(18, 20, 23, 0.8);
+}
+
+.inputsWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.logInInput {
+  border-radius: 12px;
+  width: 100%;
+  height: 54px;
+  padding-left: 18px;
+  border: 1px solid rgba(18, 20, 23, 0.1);
+}
+
+.logInInput::placeholder {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.37;
+  color: #121417;
+}
+
+.passwordWrapper {
+  position: relative;
+}
+
+.eyeButton {
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  background-color: transparent;
+}
+
+.eyeIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.error {
+  color: red;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.56;
+}
+
+.btnWrapper {
+  margin-top: 40px;
+}

@@ -2,10 +2,20 @@ import css from "./TeacherCard.module.css";
 import avatar from "../../assets/images/image 4.png";
 import iconSprite from "../../assets/sprite.svg";
 import { useState } from "react";
+import BookModal from "../BookModal/BookModal";
 
 const TeacherCard = () => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [showReadMore, setShowReadMore] = useState(false);
+  const [modalIsOpen,setModalIsOpen] = useState(false);
+  const openModal = () => {
+    setModalIsOpen(true)
+  }
+
+  const closeModal = () => {
+    setModalIsOpen(false)
+  }
+
 
   const handleClickReadMore = () => {
     setShowReadMore((previous) => !previous);
@@ -152,8 +162,13 @@ const TeacherCard = () => {
           <li className={css.tag}>#A2 Elementary</li>
           <li className={css.tag}>#B1 Intermediate</li>
           <li className={css.tag}>#B2 Upper-Intermediate</li>
+          <li className={css.tag}>#C1 Advanced</li>
+          <li className={css.tag}>#C2 Proficient</li>
         </ul>
+
+        {showReadMore && (<button className={css.bookTrial} type="button" onClick={()=>openModal()}>Book trial lesson</button>)}
       </div>
+      <BookModal modalIsOpen={modalIsOpen} closeModal={closeModal}/>
     </div>
   );
 };
