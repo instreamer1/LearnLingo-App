@@ -109,4 +109,3 @@ const LogInModal = ({ modalIsOpen, closeModal }) => {
 };
 
 export default LogInModal;
-

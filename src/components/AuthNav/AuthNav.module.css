@@ -1,6 +1,11 @@
 .authNav {
-  display: grid;
+  /* display: grid;
   grid-template-columns: 1fr auto;
+  gap: 16px; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+justify-content: right;
   gap: 16px;
 }
 
@@ -10,7 +15,7 @@
   font-size: 16px;
   line-height: 125%;
   color: #121417;
-  justify-self: end;
+  /* justify-self: end; */
 }
 
 .registration {
@@ -24,5 +29,5 @@
   width: 166px;
   height: 48px;
   background: #121417;
-  justify-self: end;
+  /* justify-self: end; */
 }
