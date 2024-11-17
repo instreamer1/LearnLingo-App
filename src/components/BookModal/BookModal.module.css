@@ -1,0 +1,232 @@
+/* .modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(100% - 32px);
+    max-height: 640px;
+    overflow-y: auto;
+    padding: 36px 16px 16px 16px;
+    border-radius: 30px;
+    z-index: 9999999;
+    outline: none;
+    background-color: #ffffff;
+  }
+   */
+   .wrapper {
+    width: 472px;
+    height: 100%;
+   }
+  /* .closeButton {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+  } */
+  
+  /* .closeIcon {
+    width: 16px;
+    height: 16px;
+  } */
+  
+  .bookTitle {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+    width: 100%;
+    color: #121417;
+  }
+  
+  .bookDesc {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.37;
+    margin-bottom: 20px;
+    color: rgba(18, 20, 23, 0.8);
+  }
+  
+  .bookSpan {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.33;
+    color: #8a8a89;
+  }
+  
+  .fullNameTitle {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #121417;
+  }
+  
+  .infoWrapper {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  
+  .avatar {
+    border-radius: 100px;
+    width: 44px;
+    height: 44px;
+  }
+  
+  .formWrapper {
+    margin-top: 40px;
+  }
+  
+  .formTitle {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 1.33;
+    color: #121417;
+  }
+  
+  .radioWrapper {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+  }
+  
+  .radioLabel {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.37;
+    color: #121417;
+  }
+  
+  .radioInput {
+    display: none;
+  }
+  
+  .radioInput + .reasonDesc {
+    position: relative;
+    padding-left: 30px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .radioInput + .reasonDesc::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 3px solid #ccc;
+    background-color: white;
+  }
+  
+  .radioInput:checked + .reasonDesc::before {
+    background-color: white;
+    border-color: #f4c550;
+  }
+  
+  .radioInput:checked + .reasonDesc::after {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #f4c550;
+  }
+  
+  .inputsWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  
+  .bookInput {
+    border-radius: 12px;
+    width: 100%;
+    height: 54px;
+    padding-left: 18px;
+    border: 1px solid rgba(18, 20, 23, 0.1);
+  }
+  
+  .bookInput::placeholder {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.37;
+    color: #121417;
+  }
+  
+  .error {
+    color: red;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 1.56;
+  }
+  
+  .btnWrapper {
+    /* position: relative; */
+    margin-top: 40px;
+  }
+  
+  /* @media screen and (min-width: 768px) {
+    .modal {
+      width: 600px;
+      padding: 64px;
+    }
+  
+    .closeButton {
+      top: 20px;
+      right: 20px;
+      width: 32px;
+      height: 32px;
+    }
+  
+    .closeIcon {
+      width: 32px;
+      height: 32px;
+    }
+  
+    .bookTitle {
+      font-size: 40px;
+    }
+  
+    .formTitle {
+      font-size: 24px;
+    }
+  
+    .radioInput + .reasonDesc::before {
+      width: 24px;
+      height: 24px;
+    }
+  
+    .radioInput:checked + .reasonDesc::after {
+      left: 5.5px;
+      width: 13px;
+      height: 12px;
+    }
+  
+    .formWrapper {
+      margin-top: 40px;
+    }
+  
+    .radioInput + .reasonDesc {
+      padding-left: 36px;
+    }
+  
+    .radioWrapper {
+      margin-bottom: 40px;
+    }
+  
+    .btnWrapper {
+      margin-top: 40px;
+    }
+  } */

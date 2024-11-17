@@ -5,7 +5,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import toast from "react-hot-toast";
 import { FiEye, FiEyeOff } from "react-icons/fi";
-import { auth } from "../../auth/"; // Импорт Firebase
+import { auth } from "../../auth/firebase.js"; // Импорт Firebase
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
 import css from "./RegistrationModal.module.css";
