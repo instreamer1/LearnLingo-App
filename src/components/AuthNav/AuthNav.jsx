@@ -3,13 +3,15 @@ import LogInModal from "../LogInModal/LogInModal";
 import RegistrationModal from "../RegistrationModal/RegistrationModal";
 import { useState } from "react";
 import LogOut from "../LogOut/LogOut";
-import { selectIsLoggedIn } from "../../redux/authFireBase/selectors";
-import { useSelector } from "react-redux";
+import { isLoggedIn } from "../../auth-firebase/session";
 
 const AuthNav = () => {
   const [logInModalIsOpen, setLogInModalIsOpen] = useState(false);
   const [registrationModalIsOpen, setRegistrationModalIsOpen] = useState(false);
-  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const loggedIn = isLoggedIn();
+ 
+
+
   const openLogInModal = () => {
     setLogInModalIsOpen(true);
   };
@@ -28,30 +30,29 @@ const AuthNav = () => {
 
   return (
     <div className={css.authNav}>
-    {isLoggedIn ? (
-      <LogOut />
-    ) : (
-      <>
-        <button className={css.logIn} type="button" onClick={openLogInModal}>
-          Log In
-        </button>
-        <button
-          className={css.registration}
-          type="button"
-          onClick={openRegistrationModal}
-        >
-          Registration
-        </button>
-      </>
-    )}
-    <LogInModal modalIsOpen={logInModalIsOpen} closeModal={closeLogInModal} />
-    <RegistrationModal
-      modalIsOpen={registrationModalIsOpen}
-      closeModal={closeRegistrationModal}
-    />
-  </div>
+      {loggedIn ? (
+        <LogOut />
+       ) : ( 
+        <>
+          <button className={css.logIn} type="button" onClick={openLogInModal}>
+            Log In
+          </button>
+          <button
+            className={css.registration}
+            type="button"
+            onClick={openRegistrationModal}
+          >
+            Registration
+          </button>
+        </>
+       )} 
+      <LogInModal modalIsOpen={logInModalIsOpen} closeModal={closeLogInModal} />
+      <RegistrationModal
+        modalIsOpen={registrationModalIsOpen}
+        closeModal={closeRegistrationModal}
+      />
+    </div>
   );
 };
 
 export default AuthNav;
-

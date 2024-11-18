@@ -1,14 +1,21 @@
 import { useState } from "react";
-import Modal from "../Modal/Modal.jsx";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import toast from "react-hot-toast";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 
-import css from "./RegistrationModal.module.css";
+import Modal from "../Modal/Modal.jsx";
 import Button from "../Button/Button.jsx";
-import { useDispatch } from "react-redux";
+import css from "./RegistrationModal.module.css";
+import { createUser } from "../../auth-firebase/firebase.js";
+import { startSession } from "../../auth-firebase/session.js";
+import LogInModal from "../LogInModal/LogInModal.jsx";
+import {
+  checkEmailExists,
+  saveUserProfile,
+} from "../../auth-firebase/firestore.js";
 
 const registrationSchema = yup.object().shape({
   name: yup.string().required("Name is required!"),
@@ -24,7 +31,6 @@ const registrationSchema = yup.object().shape({
 
 const RegistrationModal = ({ modalIsOpen, closeModal }) => {
 
-  const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
 
   const {
@@ -35,28 +41,40 @@ const RegistrationModal = ({ modalIsOpen, closeModal }) => {
   } = useForm({
     resolver: yupResolver(registrationSchema),
   });
-  const onSubmit = async (data) => {
-    try {
-      // Регистрация пользователя через Redux-операцию
-      await dispatch(
-        register({
-          email: data.email,
-          password: data.password,
-          name: data.name,
-        })
-      ).unwrap();
 
-      // Успешная регистрация
+  const onSubmit = async (data) => {
+    const { name, email, password } = data;
+    console.log("Registration data:", { name, email, password });
+
+    const emailExists = await checkEmailExists(email);
+    if (emailExists) {
+      toast.error("Email is already in use. Please try logging in.");
+      return;
+    }
+    try {
+   
+      const registerResponse = await createUser(email, password);
+
+      // await saveUserProfile({
+      //   uid: registerResponse.user.uid,
+      //   name: name,
+      //   email:email,
+      // });
+      await startSession(registerResponse.user);
+
       toast.success("User registered successfully!");
       closeModal();
       reset();
+      // navigate("/user");
+      // setLogInModalOpen(true);
     } catch (error) {
-      // Корректная обработка ошибки
+      console.error("Registration error:", error);
       const errorMessage =
         error?.message || "An unknown error occurred! Please try again.";
       toast.error(errorMessage);
     }
   };
+ 
 
   return (
     <Modal isOpen={modalIsOpen} onClose={closeModal}>
@@ -81,6 +99,7 @@ const RegistrationModal = ({ modalIsOpen, closeModal }) => {
                 )}
               </label>
             </div>
+
             <div className={css.inputWrapper}>
               <label>
                 <input
@@ -94,6 +113,7 @@ const RegistrationModal = ({ modalIsOpen, closeModal }) => {
                 )}
               </label>
             </div>
+
             <div className={css.inputWrapper}>
               <div className={css.passwordWrapper}>
                 <label>
@@ -121,11 +141,14 @@ const RegistrationModal = ({ modalIsOpen, closeModal }) => {
               )}
             </div>
           </div>
+
           <div className={css.btnWrapper}>
             <Button description="Sign up" variant="modal" type="submit" />
           </div>
         </form>
       </div>
+
+     
     </Modal>
   );
 };

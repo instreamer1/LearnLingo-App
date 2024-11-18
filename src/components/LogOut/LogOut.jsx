@@ -1,19 +1,25 @@
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import css from "./LogOut.module.css";
 import iconSprite from "../../assets/sprite.svg";
-import { useDispatch } from "react-redux";
-import { logout } from "../../redux/authFireBase/operation";
+
+
+import { logout } from "../../redux/userSlice/slice";
+import { endSession } from "../../auth-firebase/session";
 
 const LogOut = () => {
-  const dispatch = useDispatch();
-  const handleClick = () => {
-    dispatch(logout);
-  };
+  const navigate = useNavigate();
+  const dispatch = useDispatch(); 
 
+  const handleClickLogout = () => {
+    dispatch(logout()); // Обновляем состояние пользователя в Redux
+    endSession(); // Очищаем данные сессии
+    navigate("/login"); // Перенаправляем на страницу логина
+  };
   return (
     <div>
-      <button type="button" className={css.btn} onClick={handleClick}>
-        <svg className={css.iconLogin} width={20} height={20}
-        >
+      <button type="button" className={css.btn} onClick={handleClickLogout}>
+        <svg className={css.iconLogin} width={20} height={20}>
           <use href={`${iconSprite}#icon-login`}></use>
         </svg>
       </button>
