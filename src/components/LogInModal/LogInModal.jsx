@@ -41,6 +41,7 @@ const LogInModal = ({ modalIsOpen, closeModal }) => {
     const { email, password } = data; // Получаем данные из формы
     try {
       const loginResponse = await signInUser(email, password);
+      console.log(loginResponse.user);
       startSession(loginResponse.user);
       toast.success("Logged in successfully!");
       reset(); // Сбросить значения формы

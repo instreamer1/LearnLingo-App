@@ -16,6 +16,8 @@ import {
   checkEmailExists,
   saveUserProfile,
 } from "../../auth-firebase/firestore.js";
+import { useDispatch } from "react-redux";
+import { registerUser } from "../../redux/userSlice/operation.js";
 
 const registrationSchema = yup.object().shape({
   name: yup.string().required("Name is required!"),
@@ -30,7 +32,7 @@ const registrationSchema = yup.object().shape({
 });
 
 const RegistrationModal = ({ modalIsOpen, closeModal }) => {
-
+  const dispatch = useDispatch()
   const [showPassword, setShowPassword] = useState(false);
 
   const {
@@ -44,34 +46,36 @@ const RegistrationModal = ({ modalIsOpen, closeModal }) => {
 
   const onSubmit = async (data) => {
     const { name, email, password } = data;
-    console.log("Registration data:", { name, email, password });
-
-    const emailExists = await checkEmailExists(email);
-    if (emailExists) {
-      toast.error("Email is already in use. Please try logging in.");
-      return;
-    }
-    try {
    
-      const registerResponse = await createUser(email, password);
+    // console.log("Registration data:", { name, email, password });
 
-      // await saveUserProfile({
-      //   uid: registerResponse.user.uid,
-      //   name: name,
-      //   email:email,
-      // });
-      await startSession(registerResponse.user);
+    // const emailExists = await checkEmailExists(email);
+    // if (emailExists) {
+    //   toast.error("Email is already in use. Please try logging in.");
+    //   return;
+    // }
+    try {
+      await dispatch(registerUser({ name, email, password })).unwrap();
+    //   const registerResponse = await createUser(email, password);
+
+    //   // await saveUserProfile({
+    //   //   uid: registerResponse.user.uid,
+    //   //   name: name,
+    //   //   email:email,
+    //   // });
+    //   await startSession(registerResponse.user);
 
       toast.success("User registered successfully!");
       closeModal();
       reset();
-      // navigate("/user");
-      // setLogInModalOpen(true);
+    
+    //   // navigate("/user");
+    //   // setLogInModalOpen(true);
     } catch (error) {
       console.error("Registration error:", error);
-      const errorMessage =
-        error?.message || "An unknown error occurred! Please try again.";
-      toast.error(errorMessage);
+      // const errorMessage =
+      //   error?.message || "An unknown error occurred! Please try again.";
+      toast.error(error);
     }
   };
  

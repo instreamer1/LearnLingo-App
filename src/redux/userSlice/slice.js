@@ -1,5 +1,5 @@
 import { createSlice} from "@reduxjs/toolkit";
-import { endSession, getSession } from "../../auth-firebase/session";
+import { endSession, getSession, startSession } from "../../auth-firebase/session";
 import { loginUser, registerUser } from "./operation";
 
 
@@ -9,17 +9,22 @@ import { loginUser, registerUser } from "./operation";
 const userSlice = createSlice({
   name: "user",
   initialState: {
-    email: getSession().email || null,
-    accessToken: getSession().accessToken || null,
+    uid: null,
+    email: null,
+    name: null,
+    accessToken: null,
     isLoggedIn: false,
     loading: false,
     error: null,
   },
   reducers: {
     logout(state) {
+      state.uid = null;
       state.email = null;
+      state.name = null;
       state.accessToken = null;
-      endSession();
+      state.isLoggedIn = false;
+      endSession(); 
     },
   },
   extraReducers: (builder) => {
@@ -30,35 +35,37 @@ const userSlice = createSlice({
       })
       .addCase(registerUser.fulfilled, (state, action) => {
         state.loading = false;
+        console.log(action.payload);
+        state.uid = action.payload.uid;
         state.email = action.payload.email;
+        state.name = action.payload.name;
         state.accessToken = action.payload.accessToken;
-        console.log(state.accessToken);
         state.isLoggedIn = true;
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
-        state.isLoggedIn = false;
-      })
-      .addCase(loginUser.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(loginUser.fulfilled, (state, action) => {
-        state.loading = false;
-        state.isLoggedIn = true;
+      });
+
+    //   .addCase(loginUser.pending, (state) => {
+    //     state.loading = true;
+    //     state.error = null;
+    //   })
+    //   .addCase(loginUser.fulfilled, (state, action) => {
+    //     state.loading = false;
+    //     state.isLoggedIn = true;
         
     
-        console.log("Login success:", action.payload);
+    //     console.log("Login success:", action.payload);
         
-        state.email = action.payload.email;
-        state.accessToken = action.payload.accessToken;
+    //     state.email = action.payload.email;
+    //     state.accessToken = action.payload.accessToken;
 
-      })
-      .addCase(loginUser.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
-      });
+    //   })
+    //   .addCase(loginUser.rejected, (state, action) => {
+    //     state.loading = false;
+    //     state.error = action.payload;
+    //   });
   },
 });
 

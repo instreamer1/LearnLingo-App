@@ -3,7 +3,7 @@ import { fetchSignInMethodsForEmail, getAuth } from "firebase/auth";
 
 // Инициализация Firestore
 const db = getFirestore();
-const auth = getAuth();
+
 
 // Функция для сохранения профиля пользователя
 // Добавление документа в коллекцию 'users'
@@ -17,7 +17,7 @@ export async function saveUserProfile(user) {
       console.log("User profile saved!");
   } catch (error) {
     console.error("Error saving user profile:", error);
-    throw error;  // Пробрасываем ошибку, если что-то пошло не так
+    throw error; 
   }
 };
 
@@ -37,7 +37,7 @@ export async function getUserProfile(uid) {
 }
 
 // Чтение всех документов из коллекции
-async function getAllUsers() {
+export async function getAllUsers() {
   const querySnapshot = await getDocs(collection(db, "users"));
   querySnapshot.forEach((doc) => {
     console.log(doc.id, " => ", doc.data());
@@ -45,7 +45,7 @@ async function getAllUsers() {
 }
 
 
-// import { getAuth, fetchSignInMethodsForEmail } from "firebase/auth";
+
 
 export const checkEmailExists = async (email) => {
   const auth = getAuth();
