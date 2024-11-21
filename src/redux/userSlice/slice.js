@@ -45,27 +45,26 @@ const userSlice = createSlice({
       .addCase(registerUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
+      })
+
+      .addCase(loginUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(loginUser.fulfilled, (state, action) => {
+        // console.log("Login success:", action.payload);
+        state.loading = false;
+        console.log(action.payload);
+        state.uid = action.payload.uid;
+        state.email = action.payload.email;
+        state.accessToken = action.payload.accessToken;
+        state.isLoggedIn = true;
+
+      })
+      .addCase(loginUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       });
-
-    //   .addCase(loginUser.pending, (state) => {
-    //     state.loading = true;
-    //     state.error = null;
-    //   })
-    //   .addCase(loginUser.fulfilled, (state, action) => {
-    //     state.loading = false;
-    //     state.isLoggedIn = true;
-        
-    
-    //     console.log("Login success:", action.payload);
-        
-    //     state.email = action.payload.email;
-    //     state.accessToken = action.payload.accessToken;
-
-    //   })
-    //   .addCase(loginUser.rejected, (state, action) => {
-    //     state.loading = false;
-    //     state.error = action.payload;
-    //   });
   },
 });
 

@@ -1,21 +1,12 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import toast from "react-hot-toast";
 import { FiEye, FiEyeOff } from "react-icons/fi";
-
 import Modal from "../Modal/Modal.jsx";
 import Button from "../Button/Button.jsx";
 import css from "./RegistrationModal.module.css";
-import { createUser } from "../../auth-firebase/firebase.js";
-import { startSession } from "../../auth-firebase/session.js";
-import LogInModal from "../LogInModal/LogInModal.jsx";
-import {
-  checkEmailExists,
-  saveUserProfile,
-} from "../../auth-firebase/firestore.js";
 import { useDispatch } from "react-redux";
 import { registerUser } from "../../redux/userSlice/operation.js";
 
@@ -32,7 +23,7 @@ const registrationSchema = yup.object().shape({
 });
 
 const RegistrationModal = ({ modalIsOpen, closeModal }) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
 
   const {
@@ -46,39 +37,15 @@ const RegistrationModal = ({ modalIsOpen, closeModal }) => {
 
   const onSubmit = async (data) => {
     const { name, email, password } = data;
-   
-    // console.log("Registration data:", { name, email, password });
-
-    // const emailExists = await checkEmailExists(email);
-    // if (emailExists) {
-    //   toast.error("Email is already in use. Please try logging in.");
-    //   return;
-    // }
     try {
       await dispatch(registerUser({ name, email, password })).unwrap();
-    //   const registerResponse = await createUser(email, password);
-
-    //   // await saveUserProfile({
-    //   //   uid: registerResponse.user.uid,
-    //   //   name: name,
-    //   //   email:email,
-    //   // });
-    //   await startSession(registerResponse.user);
-
       toast.success("User registered successfully!");
-      closeModal();
       reset();
-    
-    //   // navigate("/user");
-    //   // setLogInModalOpen(true);
+      closeModal();
     } catch (error) {
-      console.error("Registration error:", error);
-      // const errorMessage =
-      //   error?.message || "An unknown error occurred! Please try again.";
       toast.error(error);
     }
   };
- 
 
   return (
     <Modal isOpen={modalIsOpen} onClose={closeModal}>
@@ -151,8 +118,6 @@ const RegistrationModal = ({ modalIsOpen, closeModal }) => {
           </div>
         </form>
       </div>
-
-     
     </Modal>
   );
 };

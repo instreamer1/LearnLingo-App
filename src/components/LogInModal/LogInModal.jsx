@@ -7,9 +7,9 @@ import { FiEye, FiEyeOff } from "react-icons/fi";
 import toast from "react-hot-toast";
 import Button from "../Button/Button.jsx";
 import css from "./LogInModal.module.css";
-import { startSession } from "../../auth-firebase/session.js";
-import { signInUser } from "../../auth-firebase/firebase.js"; 
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../../redux/userSlice/operation.js";
 
 
 const logInSchema = yup.object().shape({
@@ -24,6 +24,7 @@ const logInSchema = yup.object().shape({
 });
 
 const LogInModal = ({ modalIsOpen, closeModal }) => {
+  const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
@@ -38,14 +39,12 @@ const LogInModal = ({ modalIsOpen, closeModal }) => {
   });
 
   const onSubmit = async (data) => {
-    const { email, password } = data; // Получаем данные из формы
+    const { email, password } = data;
     try {
-      const loginResponse = await signInUser(email, password);
-      console.log(loginResponse.user);
-      startSession(loginResponse.user);
+      await dispatch(loginUser({ email, password })).unwrap();
       toast.success("Logged in successfully!");
-      reset(); // Сбросить значения формы
-      closeModal(); // Закрыть модальное окно
+      reset();
+      closeModal(); 
       navigate("/user");
     } catch (error) {
       console.error(error.message);

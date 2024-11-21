@@ -4,6 +4,8 @@ import Layout from "./components/Layout/Layout";
 import HomePage from "./pages/HomePage/HomePage";
 import TeachersPage from "./pages/TeachersPage/TeachersPage";
 import { Toaster } from "react-hot-toast";
+import FileUpload from './components/FileUpload.jsx';
+
 
 function App() {
   return (
@@ -16,6 +18,7 @@ function App() {
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
       <Toaster />
+      <FileUpload />
     </>
   );
 }
