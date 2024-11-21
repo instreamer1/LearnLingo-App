@@ -17,22 +17,28 @@ const teacherSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-    .addCase(getTeachers.pending, (state) => {
+      .addCase(getTeachers.pending, (state) => {
         console.log("Fetching teachers: pending...");
         state.loading = true;
         state.error = null;
       })
       .addCase(getTeachers.fulfilled, (state, action) => {
-        console.log("Fetching teachers: fulfilled with payload", action.payload);
+        console.log(
+          "Fetching teachers: fulfilled with payload",
+          action.payload
+        );
         state.loading = false;
         const newTeachers = action.payload;
-        state.list = [...state.list, ...newTeachers];
-          // Добавляем только учителей с уникальными ID
-  // const existingIds = new Set(state.list.map(teacher => teacher.id)); // Собираем текущие ID
-  // const uniqueTeachers = newTeachers.filter(teacher => !existingIds.has(teacher.id)); // Фильтруем новых учителей
-
-  // state.list = [...state.list, ...uniqueTeachers]; 
-        state.lastKey = newTeachers.length ? newTeachers[newTeachers.length - 1].id : null;
+        // state.list = [...state.list, ...newTeachers];
+        // Добавляем только учителей с уникальными ID
+        const existingIds = new Set(state.list.map((teacher) => teacher.id)); // Собираем текущие ID
+        const uniqueTeachers = newTeachers.filter(
+          (teacher) => !existingIds.has(teacher.id)
+        ); // Фильтруем новых учителей
+        state.list = [...state.list, ...uniqueTeachers];
+        state.lastKey = newTeachers.length
+          ? newTeachers[newTeachers.length - 1].id
+          : null;
       })
       .addCase(getTeachers.rejected, (state, action) => {
         console.error("Fetching teachers: rejected with error", action.payload);

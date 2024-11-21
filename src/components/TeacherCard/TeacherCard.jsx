@@ -4,18 +4,31 @@ import iconSprite from "../../assets/sprite.svg";
 import { useState } from "react";
 import BookModal from "../BookModal/BookModal";
 
-const TeacherCard = () => {
+const TeacherCard = ({ teacher }) => {
+  const {
+    avatar_url,
+    name,
+    surname,
+    lessons_done,
+    rating,
+    price_per_hour,
+    languages,
+    lesson_info,
+    conditions,
+    experience,
+    levels,
+    reviews,
+  } = teacher;
   const [isFavorite, setIsFavorite] = useState(false);
   const [showReadMore, setShowReadMore] = useState(false);
-  const [modalIsOpen,setModalIsOpen] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const openModal = () => {
-    setModalIsOpen(true)
-  }
+    setModalIsOpen(true);
+  };
 
   const closeModal = () => {
-    setModalIsOpen(false)
-  }
-
+    setModalIsOpen(false);
+  };
 
   const handleClickReadMore = () => {
     setShowReadMore((previous) => !previous);
@@ -30,7 +43,11 @@ const TeacherCard = () => {
   return (
     <div className={css.card}>
       <div className={css.avatarWrapper}>
-        <img src={avatar} alt="Jane Smith" className={css.avatarPhoto} />
+        <img
+          src={avatar_url}
+          alt={`${name} ${surname}`}
+          className={css.avatarPhoto}
+        />
 
         <svg className={css.onlineStatus}>
           <use href={`${iconSprite}#icon-online`}></use>
@@ -40,25 +57,9 @@ const TeacherCard = () => {
         <div className={css.cardWrapper}>
           <div className={css.cardHeader}>
             <p className={css.languages}>Languages</p>
-            <h2 className={css.name}>Jane Smith</h2>
+            <h2 className={css.name}>{`${name} ${surname}`}</h2>
           </div>
           <div className={css.cardLessonWrapper}>
-            {/* <ul className={css.cardLesson}>
-              <li>
-                <svg className={css.iconBook}>
-                  <use href={`${iconSprite}#icon-book`}></use>
-                </svg>{" "}
-                Lessons online
-              </li>
-              <li> | Lessons done: 1098</li>
-              <li>
-                <svg className={css.iconStar}>
-                  <use href={`${iconSprite}#icon-star`}></use>
-                </svg>
-                Rating: 4.8
-              </li>
-              <li>| Price / 1 hour: $30</li>
-            </ul> */}
             <ul className={css.cardLesson}>
               <li className={`${css.cardItem} ${css.withLine}`}>
                 <svg className={css.iconBook}>
@@ -67,17 +68,17 @@ const TeacherCard = () => {
                 Lessons online
               </li>
               <li className={`${css.cardItem} ${css.withLine}`}>
-                Lessons done: 1098
+                {`Lessons done: ${lessons_done}`}
               </li>
               <li className={`${css.cardItem} ${css.withLine}`}>
                 <svg className={css.iconStar}>
                   <use href={`${iconSprite}#icon-star`}></use>
                 </svg>
-                Rating: 4.8
+                {` Rating: ${rating}`}
               </li>
-              <li className={css.cardItem}>
-                Price / 1 hour: $30
-              </li>
+              <li
+                className={css.cardItem}
+              >{`Price / 1 hour: ${price_per_hour}`}</li>
             </ul>
 
             <button
@@ -96,15 +97,30 @@ const TeacherCard = () => {
           </div>
         </div>
         <p className={css.speaks}>
-          Speaks: <span>German, French</span>
+          Speaks:
+          {languages.length > 0 ? (
+            languages.map((language) => (
+              <span key={language} className={css.language}>
+                {" "}
+                {language}
+              </span>
+            ))
+          ) : (
+            <span>No languages specified</span>
+          )}
         </p>
         <p className={css.lessonInfo}>
-          Lesson Info: <span>Lessons are structured to cover grammar, vocabulary, and
-          practical usage of the language.</span>
+          Lesson Info: <span>{lesson_info}</span>
         </p>
         <p className={css.conditions}>
-          Conditions: <span>Welcomes both adult learners and teenagers (13 years and
-          above). Provides personalized study plans.</span>
+          Conditions:{" "}
+          {conditions.length > 0 ? (
+            conditions.map((condition, index) => (
+              <span key={index}> {condition}</span>
+            ))
+          ) : (
+            <span>No conditions specified</span>
+          )}
         </p>
         {!showReadMore && (
           <button
@@ -115,60 +131,60 @@ const TeacherCard = () => {
             Read more
           </button>
         )}
-        {/* <a href="#" className={css.readMore}>
-          Read more
-        </a> */}
+
         {showReadMore && (
           <div className={css.aboutTeacher}>
-            <p className={css.aboutTeacherText}>
-              Jane is an experienced and dedicated language teacher specializing
-              in German and French. She holds a Bachelor's degree in German
-              Studies and a Master's degree in French Literature. Her passion
-              for languages and teaching has driven her to become a highly
-              proficient and knowledgeable instructor. With over 10 years of
-              teaching experience, Jane has helped numerous students of various
-              backgrounds and proficiency levels achieve their language learning
-              goals. She is skilled at adapting her teaching methods to suit the
-              needs and learning styles of her students, ensuring that they feel
-              supported and motivated throughout their language journey.
-            </p>
+            <p className={css.aboutTeacherText}>{experience}</p>
             <ul className={css.reviewsList}>
-              <li className={css.reviewsListItem}>
-                <div className={css.reviewsWrapper}>
-                  <img
-                    src={avatar}
-                    alt="User avatar"
-                    className={css.reviewsPhoto}
-                  />
-                  <div className={css.reviewsUser}>
-                    <p className={css.reviewsUserName}>Frank</p>
-                    <div className={css.reviewsUserStars}>
-                      <svg className={css.iconReviewsStar}>
-                        <use href={`${iconSprite}#icon-star`}></use>
-                      </svg>
-                      <p className={css.reviewsUserRating}>4.8</p>
-                    </div>
-                  </div>
-                </div>
-                <p className={css.reviewsUserFeedback}>
-                  Jane's lessons were very helpful. I made good progress.
-                </p>
-              </li>
+              {reviews.length > 0 &&
+                reviews.map(
+                  ({ comment, reviewer_name, reviewer_rating }, index) => (
+                    <li key={index} className={css.reviewsListItem}>
+                      <div className={css.reviewsWrapper}>
+                        <img
+                          src={avatar}
+                          alt="User avatar"
+                          className={css.reviewsPhoto}
+                        />
+                        <div className={css.reviewsUser}>
+                          <p className={css.reviewsUserName}>{reviewer_name}</p>
+                          <div className={css.reviewsUserStars}>
+                            <svg className={css.iconReviewsStar}>
+                              <use href={`${iconSprite}#icon-star`}></use>
+                            </svg>
+                            <p className={css.reviewsUserRating}>
+                              {reviewer_rating}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <p className={css.reviewsUserFeedback}>{comment}</p>
+                    </li>
+                  )
+                )}
             </ul>
           </div>
         )}
         <ul className={css.tags}>
-          <li className={css.tag}>#A1 Beginner</li>
-          <li className={css.tag}>#A2 Elementary</li>
-          <li className={css.tag}>#B1 Intermediate</li>
-          <li className={css.tag}>#B2 Upper-Intermediate</li>
-          <li className={css.tag}>#C1 Advanced</li>
-          <li className={css.tag}>#C2 Proficient</li>
+          {levels.length > 0 &&
+            levels.map((level, index) => (
+              <li key={index} className={css.tag}>
+                {level}
+              </li>
+            ))}
         </ul>
 
-        {showReadMore && (<button className={css.bookTrial} type="button" onClick={()=>openModal()}>Book trial lesson</button>)}
+        {showReadMore && (
+          <button
+            className={css.bookTrial}
+            type="button"
+            onClick={() => openModal()}
+          >
+            Book trial lesson
+          </button>
+        )}
       </div>
-      <BookModal modalIsOpen={modalIsOpen} closeModal={closeModal}/>
+      <BookModal modalIsOpen={modalIsOpen} closeModal={closeModal} />
     </div>
   );
 };

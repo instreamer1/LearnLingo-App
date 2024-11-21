@@ -1,9 +1,29 @@
-section{
-    
+section {
 }
 
 .container {
-    padding-left: 128px;
-    padding-right: 128px;
-    background: #f8f8f8;
+  padding-left: 128px;
+  padding-right: 128px;
+  background: #f8f8f8;
+}
+
+.teacher {
+    display: flex;
+  flex-direction: column;
+}
+
+.btn {
+  border-radius: 12px;
+  padding: 16px 48px;
+  width: 183px;
+  height: 60px;
+  background: #f4c550;
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 156%;
+  color: #121417;
+  align-self: center;
+
+
 }

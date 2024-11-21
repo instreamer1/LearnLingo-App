@@ -18,12 +18,7 @@ const TeachersPage = () => {
   useEffect(() => {
     dispatch(getTeachers({ pageSize, lastKey: null }));
   }, [dispatch, pageSize]);
-  // useEffect(() => {
-  //   if (loading) {
-  //     // Проверка, чтобы избежать повторных вызовов
-  //     dispatch(getTeachers({ pageSize, lastKey: null }));
-  //   }
-  // }, [pageSize, loading]);
+
 
   const loadMore = () => {
     dispatch(getTeachers({ pageSize, lastKey }));
@@ -46,14 +41,14 @@ const TeachersPage = () => {
         <ul>
           {list.map((teacher) => (
             <li key={teacher.id} id={teacher.id}>
-              <TeacherCard />
+              <TeacherCard teacher={teacher}/>
             </li>
           ))}
         </ul>
         {loading ? (
           <p>Loading more...</p>
         ) : (
-          <button onClick={loadMore}>Load More</button>
+          <button className={css.btn} onClick={loadMore}>Load More</button>
         )}
       </section>
     </>
