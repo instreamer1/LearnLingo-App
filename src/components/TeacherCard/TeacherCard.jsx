@@ -18,6 +18,7 @@ const TeacherCard = ({ teacher }) => {
     experience,
     levels,
     reviews,
+    is_online,
   } = teacher;
   const [isFavorite, setIsFavorite] = useState(false);
   const [showReadMore, setShowReadMore] = useState(false);
@@ -49,9 +50,9 @@ const TeacherCard = ({ teacher }) => {
           className={css.avatarPhoto}
         />
 
-        <svg className={css.onlineStatus}>
+      {is_online && <svg className={css.onlineStatus}>
           <use href={`${iconSprite}#icon-online`}></use>
-        </svg>
+        </svg>}
       </div>
       <div className={css.cardBody}>
         <div className={css.cardWrapper}>

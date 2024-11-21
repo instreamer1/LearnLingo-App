@@ -1,15 +1,26 @@
 section {
+  background: #f8f8f8;
+}
+
+.filters {
+   padding: 20px 0 32px; 
 }
 
 .container {
   padding-left: 128px;
   padding-right: 128px;
-  background: #f8f8f8;
 }
 
-.teacher {
-    display: flex;
+.teacher > .container{
+  display: flex;
   flex-direction: column;
+}
+
+.teachersList {
+  display: flex;
+  flex-direction: column;
+  row-gap: 32px;
+  margin-bottom: 64px;
 }
 
 .btn {
@@ -24,6 +35,5 @@ section {
   line-height: 156%;
   color: #121417;
   align-self: center;
-
-
+  margin-bottom: 64px;
 }
