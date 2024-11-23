@@ -3,7 +3,7 @@ import { createUser, signInUser } from "../../auth-firebase/firebase";
 import { startSession } from "../../auth-firebase/session";
 import { saveUserProfile } from "../../auth-firebase/firestore";
 
-// Async thunk for user registration
+
 export const registerUser = createAsyncThunk(
   "user/register",
   async ({ name, email, password }, thunkAPI) => {
@@ -21,8 +21,8 @@ export const registerUser = createAsyncThunk(
         accessToken: await response.user.getIdToken(),
       };
 
-      startSession(user); // Save session data after registration
-      await saveUserProfile(user); // Save user profile in Firestore
+      startSession(user); 
+      await saveUserProfile(user); 
 
       return user;
     } catch (error) {
@@ -32,7 +32,7 @@ export const registerUser = createAsyncThunk(
   }
 );
 
-// Async thunk for user login
+
 export const loginUser = createAsyncThunk(
   "user/login",
   async ({ email, password }, thunkAPI) => {
@@ -44,7 +44,7 @@ export const loginUser = createAsyncThunk(
         accessToken: await response.user.getIdToken(),
       };
 
-      startSession(user); // Save session data after login
+      startSession(user); 
       return user;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

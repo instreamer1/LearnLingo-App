@@ -32,7 +32,7 @@ const teacherSlice = createSlice({
         const newTeachers = action.payload;
         state.teacherPage = newTeachers.length;
         // state.list = [...state.list, ...newTeachers];
-        // Добавляем только учителей с уникальными ID
+       
         const existingIds = new Set(state.list.map((teacher) => teacher.id)); 
         const uniqueTeachers = newTeachers.filter(
           (teacher) => !existingIds.has(teacher.id)

@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 import { startSession, getSession, endSession } from "../../auth-firebase/session";
 import { loginUser, registerUser } from "./operations";
 
-// Fetch saved session data from sessionStorage
 const savedSession = getSession();
 
 const userSlice = createSlice({
@@ -60,7 +59,7 @@ const userSlice = createSlice({
         state.email = action.payload.email;
         state.accessToken = action.payload.accessToken;
         state.isLoggedIn = true;
-        startSession(action.payload); // Save user session data after login
+        startSession(action.payload); 
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;

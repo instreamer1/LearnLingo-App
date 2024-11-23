@@ -8,7 +8,7 @@ import {
 } from "../../redux/favoritesSlice/selectors";
 import { useEffect } from "react";
 import { fetchFavorites } from "../../redux/favoritesSlice/operations";
-import { selectIsLoggedIn, selectUid } from "../../redux/userSlice/selectors";
+import { selectAccessToken, selectIsLoggedIn, selectUid } from "../../redux/userSlice/selectors";
 
 function FavoritesPage() {
   const favorites = useSelector(selectFavorites);
@@ -17,12 +17,13 @@ function FavoritesPage() {
   const dispatch = useDispatch();
   const uid = useSelector(selectUid);
   const isLoggedIn = useSelector(selectIsLoggedIn);
+  const accessToken = useSelector(selectAccessToken);
 
   useEffect(() => {
     if (isLoggedIn && uid) {
-      dispatch(fetchFavorites(uid));
+      dispatch(fetchFavorites({uid, accessToken}));
     }
-  }, [dispatch, isLoggedIn, uid]);
+  }, [dispatch, isLoggedIn, uid, accessToken]);
 
   return (
     <section className={css.favorites}>

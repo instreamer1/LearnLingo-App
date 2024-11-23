@@ -11,6 +11,7 @@ import {
   selectLoading,
   selectTeacherPage,
 } from "../../redux/teacherSlice/selectors";
+import { selectAccessToken } from "../../redux/userSlice/selectors";
 
 const TeachersPage = () => {
   const loading = useSelector(selectLoading);
@@ -18,6 +19,9 @@ const TeachersPage = () => {
   const error = useSelector(selectError);
   const lastKey = useSelector(selectLastKey);
   const teacherPage = useSelector(selectTeacherPage);
+  const accessToken = useSelector(selectAccessToken);
+
+  console.log("accessToken", accessToken);
   const dispatch = useDispatch();
 
   const [pageSize] = useState(4);

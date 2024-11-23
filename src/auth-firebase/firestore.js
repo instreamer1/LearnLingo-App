@@ -82,42 +82,7 @@ export async function toggleFavoriteTeacher(uid, teacher, isFavorite) {
   }
 }
 
-/**
- * Получает список избранных учителей пользователя.
- * @param {string} uid - ID пользователя (uid).
- * @returns {Array} Массив избранных учителей.
- */
-
-// export async function getUserFavoriteTeachers(uid, token) {
-//   try {
-//     const userRef = doc(firestore, "users", uid);
-
-//     // Если токен используется для дополнительной валидации (например, через custom fetch)
-//     const options = {
-//       headers: {
-//         Authorization: `Bearer ${token}`,
-//       },
-//     };
-//     const userDoc = await getDoc(userRef, options);
-//     //const userDoc = await getDoc(userRef); // Firestore SDK автоматически управляет токенами
-//     if (userDoc.exists()) {
-//       const userData = userDoc.data();
-//       return userData.favorites || []; // Возвращаем массив избранных учителей
-//     } else {
-//       console.error(`No user document found for UID: ${uid}`);
-//       return [];
-//     }
-//   } catch (error) {
-//     console.error("Error fetching favorites:", error);
-//     throw error;
-//   }
-// }
-
-
-
-
-
-export async function getUserFavoriteTeachers(uid) {
+export async function getUserFavoriteTeachers({uid, accessToken}) {
   try {
     const userRef = doc(firestore, "users", uid); // Ссылка на документ пользователя
     const userDoc = await getDoc(userRef); // Получаем документ из Firestore
@@ -134,6 +99,28 @@ export async function getUserFavoriteTeachers(uid) {
     throw error; // Пробрасываем ошибку для обработки вызывающей стороной
   }
 }
+
+
+
+
+
+// export async function getUserFavoriteTeachers(uid) {
+//   try {
+//     const userRef = doc(firestore, "users", uid); // Ссылка на документ пользователя
+//     const userDoc = await getDoc(userRef); // Получаем документ из Firestore
+
+//     if (userDoc.exists()) {
+//       const userData = userDoc.data();
+//       return userData.favorites || []; // Возвращаем массив избранных учителей
+//     } else {
+//       console.error(`No user document found for UID: ${uid}`);
+//       return []; // Если документ отсутствует, возвращаем пустой массив
+//     }
+//   } catch (error) {
+//     console.error("Error fetching favorites:", error);
+//     throw error; // Пробрасываем ошибку для обработки вызывающей стороной
+//   }
+// }
 // Пояснения
 // Использование getDoc: Мы читаем весь документ пользователя с помощью getDoc и обращаемся к полю favorites, которое является массивом.
 
