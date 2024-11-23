@@ -1,10 +1,18 @@
 import css from "./TeacherCard.module.css";
 import avatar from "../../assets/images/image 4.png";
 import iconSprite from "../../assets/sprite.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BookModal from "../BookModal/BookModal";
+import toast from "react-hot-toast";
+
+import { selectIsLoggedIn, selectUid } from "../../redux/userSlice/selectors";
+import { useSelector } from "react-redux";
+import { toggleFavoriteTeacher } from "../../auth-firebase/firestore";
 
 const TeacherCard = ({ teacher }) => {
+  const uid = useSelector(selectUid);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+
   const {
     avatar_url,
     name,
@@ -19,10 +27,70 @@ const TeacherCard = ({ teacher }) => {
     levels,
     reviews,
     is_online,
+    id,
   } = teacher;
+
   const [isFavorite, setIsFavorite] = useState(false);
   const [showReadMore, setShowReadMore] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  // const userRef = uid ? doc(firestore, "users", uid) : null;
+  // console.log("uid TeacherCard", uid);
+
+  // Обработчик клика на "Добавить/Удалить из избранного"
+const handleFavoriteClick = async () => {
+  console.log("uid TeacherCard", uid);
+  if (!isLoggedIn) {
+    toast.error("Please log in to add teachers to favorites.");
+    return;
+  }
+
+  try {
+    await toggleFavoriteTeacher(uid, teacher, isFavorite);
+    setIsFavorite(!isFavorite); // Обновить локальное состояние
+  } catch (error) {
+    console.log(error.message);
+    toast.error("An error occurred while updating favorites.");
+  }
+};
+
+  // useEffect(() => {
+  //   if (userRef) {
+  //     const unsubscribe = onSnapshot(userRef, (snapshot) => {
+  //       const data = snapshot.data();
+  //       if (data?.favorites) {
+  //         setIsFavorite(data.favorites.some((fav) => fav.id === teacher.id));
+  //       }
+  //     });
+  //     return unsubscribe; // Cleanup on unmount
+  //   }
+  // }, [userRef, teacher.id]);
+
+  // const handleFavoriteClick = async (e) => {
+  //   e.stopPropagation();
+  //   console.log("Autentith?", isLoggedIn);
+  //   if (!isLoggedIn) {
+  //     toast.error("Please log in to add teachers to favorites.");
+  //     return;
+  //   }
+
+  //   try {
+  //     await updateDoc(userRef, {
+  //       favorites: isFavorite
+  //         ? arrayRemove({ id, name, surname, avatar_url })
+  //         : arrayUnion({ id, name, surname, avatar_url }),
+  //     });
+  //     toast.success(
+  //       isFavorite
+  //         ? "Removed from favorites."
+  //         : "Added to favorites."
+  //     );
+  //   } catch (error) {
+  //     console.error("Error updating favorites:", error);
+  //     toast.error("An error occurred while updating favorites.");
+  //   }
+  // };
+
   const openModal = () => {
     setModalIsOpen(true);
   };
@@ -31,16 +99,10 @@ const TeacherCard = ({ teacher }) => {
     setModalIsOpen(false);
   };
 
-  const handleClickReadMore = () => {
-    setShowReadMore((previous) => !previous);
-  };
+  // const handleClickReadMore = () => {
+  //   setShowReadMore((previous) => !previous);
+  // };
 
-  const handleFavoriteClick = (e) => {
-    e.stopPropagation();
-    if (isFavorite) {
-    } else {
-    }
-  };
   return (
     <div className={css.card}>
       <div className={css.avatarWrapper}>
@@ -50,9 +112,11 @@ const TeacherCard = ({ teacher }) => {
           className={css.avatarPhoto}
         />
 
-      {is_online && <svg className={css.onlineStatus}>
-          <use href={`${iconSprite}#icon-online`}></use>
-        </svg>}
+        {is_online && (
+          <svg className={css.onlineStatus}>
+            <use href={`${iconSprite}#icon-online`}></use>
+          </svg>
+        )}
       </div>
       <div className={css.cardBody}>
         <div className={css.cardWrapper}>
@@ -84,15 +148,22 @@ const TeacherCard = ({ teacher }) => {
 
             <button
               className={css.favoriteButton}
+              // {`${css.favoriteButton} ${
+              //   isFavorite ? css.iconHartFav : ""
+              // }`}
+
               onClick={handleFavoriteClick}
-              aria-label={isFavorite ? " removeFavorite" : "addFavorite"}
+              aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
             >
               <svg
-                className={`${css.iconHart} ${
-                  isFavorite ? css.iconHartFav : ""
-                }`}
+                className={
+                  isFavorite
+                  //  && isLoggedIn
+                    ? `${css.iconHartFav}`
+                    : `${css.iconHart}`
+                }
               >
-                <use href={`${iconSprite}#icon-hart`}></use>
+                <use href={`${iconSprite}#icon-vector-hart`}></use>
               </svg>
             </button>
           </div>
@@ -123,15 +194,9 @@ const TeacherCard = ({ teacher }) => {
             <span>No conditions specified</span>
           )}
         </p>
-        {!showReadMore && (
-          <button
-            className={css.readMore}
-            type="button"
-            onClick={handleClickReadMore}
-          >
-            Read more
-          </button>
-        )}
+        <button className={css.readMore} onClick={() => setShowReadMore((prev) => !prev)}>
+          {showReadMore ? "Hide" : "Read more"}
+        </button>
 
         {showReadMore && (
           <div className={css.aboutTeacher}>
@@ -185,9 +250,44 @@ const TeacherCard = ({ teacher }) => {
           </button>
         )}
       </div>
-      <BookModal modalIsOpen={modalIsOpen} closeModal={closeModal} />
+      <BookModal
+        modalIsOpen={modalIsOpen}
+        closeModal={closeModal}
+        teacher={teacher}
+      />
     </div>
   );
 };
 
 export default TeacherCard;
+
+// // Проверяем локальное хранилище при монтировании
+// useEffect(() => {
+//   const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+//   setIsFavorite(favorites.includes(id));
+// }, [id]);
+
+// // Обработчик клика по сердцу
+// const handleFavoriteClick = (e) => {
+//   e.stopPropagation();
+
+//   if (!isAuthenticated) {
+//     toast.success(
+//       "This functionality is available only to authorized users!"
+//     );
+//     return;
+//   }
+
+//   const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+//   if (isFavorite) {
+//     // Удаляем из избранного
+//     const updatedFavorites = favorites.filter((favId) => favId !== id);
+//     localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+//   } else {
+//     // Добавляем в избранное
+//     favorites.push(id);
+//     localStorage.setItem("favorites", JSON.stringify(favorites));
+//   }
+
+//   setIsFavorite((prev) => !prev);
+// };

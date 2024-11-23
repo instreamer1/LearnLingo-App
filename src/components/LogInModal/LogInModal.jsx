@@ -9,8 +9,7 @@ import Button from "../Button/Button.jsx";
 import css from "./LogInModal.module.css";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { loginUser } from "../../redux/userSlice/operation.js";
-
+import { loginUser } from "../../redux/userSlice/operations.js";
 
 const logInSchema = yup.object().shape({
   email: yup
@@ -28,7 +27,7 @@ const LogInModal = ({ modalIsOpen, closeModal }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  
+
   const {
     register,
     handleSubmit,
@@ -44,7 +43,7 @@ const LogInModal = ({ modalIsOpen, closeModal }) => {
       await dispatch(loginUser({ email, password })).unwrap();
       toast.success("Logged in successfully!");
       reset();
-      closeModal(); 
+      closeModal();
       navigate("/user");
     } catch (error) {
       console.error(error.message);
@@ -63,7 +62,6 @@ const LogInModal = ({ modalIsOpen, closeModal }) => {
         </p>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className={css.inputsWrapper}>
-       
             <div className={css.inputWrapper}>
               <label>
                 <input
@@ -77,7 +75,7 @@ const LogInModal = ({ modalIsOpen, closeModal }) => {
                 )}
               </label>
             </div>
-      
+
             <div className={css.inputWrapper}>
               <div className={css.passwordWrapper}>
                 <label>
@@ -105,7 +103,7 @@ const LogInModal = ({ modalIsOpen, closeModal }) => {
               )}
             </div>
           </div>
-         
+
           <div className={css.btnWrapper}>
             <Button description="Log in" variant="modal" type="submit" />
           </div>
@@ -117,4 +115,3 @@ const LogInModal = ({ modalIsOpen, closeModal }) => {
 };
 
 export default LogInModal;
-

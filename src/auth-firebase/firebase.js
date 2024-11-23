@@ -6,8 +6,7 @@ import {
 } from "firebase/auth";
 import { getDatabase, ref, push, set } from 'firebase/database';
 import { getFirestore } from "firebase/firestore";
-// import { getDatabase } from "firebase/database";
-import { getAnalytics } from "firebase/analytics"; 
+
 
 
 const firebaseConfig = {
@@ -23,7 +22,8 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
+export const database = getDatabase(app);
+export const firestore = getFirestore(app);
 
 // Functions for authentication
 export const createUser = async (name, email, password ) => {
@@ -34,7 +34,6 @@ export const signInUser = async (email, password) => {
   return signInWithEmailAndPassword(getAuth(app), email, password);
 };
 
-export { db, ref, push, set };
 
 // export const signInUser = async (email, password) => {
 //   const auth = getAuth(app);

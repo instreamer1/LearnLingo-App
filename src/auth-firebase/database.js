@@ -1,5 +1,4 @@
 import {
-  getDatabase,
   ref,
   get,
   query,
@@ -7,10 +6,10 @@ import {
   startAt,
   limitToFirst,
 } from "firebase/database";
+import { database } from "./firebase";
 
 // Функция для получения данных учителей с пагинацией
 export const fetchTeachers = async ({ pageSize, lastKey = null }) => {
-  const database = getDatabase();
   const teacherQuery = query(
     ref(database, "teachers"),
     orderByChild("id"), // Поле для сортировки

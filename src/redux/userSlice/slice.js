@@ -1,19 +1,19 @@
-import { createSlice} from "@reduxjs/toolkit";
-import { endSession, getSession, startSession } from "../../auth-firebase/session";
-import { loginUser, registerUser } from "./operation";
+import { createSlice } from "@reduxjs/toolkit";
+import {
+   startSession, getSession, endSession 
+} from "../../auth-firebase/session";
+import { loginUser, registerUser } from "./operations";
 
-
-
-
+const savedSession = getSession();
 
 const userSlice = createSlice({
   name: "user",
   initialState: {
-    uid: null,
-    email: null,
+    uid: savedSession.uid || null,
+    email: savedSession.email || null,
     name: null,
-    accessToken: null,
-    isLoggedIn: false,
+    accessToken: savedSession.accessToken || null,
+    isLoggedIn: !!savedSession.accessToken,
     loading: false,
     error: null,
   },
@@ -24,7 +24,7 @@ const userSlice = createSlice({
       state.name = null;
       state.accessToken = null;
       state.isLoggedIn = false;
-      endSession(); 
+      endSession();
     },
   },
   extraReducers: (builder) => {
@@ -41,6 +41,7 @@ const userSlice = createSlice({
         state.name = action.payload.name;
         state.accessToken = action.payload.accessToken;
         state.isLoggedIn = true;
+        startSession(action.payload);
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.loading = false;
@@ -59,7 +60,7 @@ const userSlice = createSlice({
         state.email = action.payload.email;
         state.accessToken = action.payload.accessToken;
         state.isLoggedIn = true;
-
+        startSession(action.payload);
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
@@ -70,4 +71,3 @@ const userSlice = createSlice({
 
 export const { logout } = userSlice.actions;
 export default userSlice.reducer;
-

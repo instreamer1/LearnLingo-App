@@ -45,7 +45,6 @@
 
 .cardWrapper {
   display: flex;
-  /* gap: 149px; */
   height: 56px;
   justify-content: space-between;
   margin-bottom: 32px;
@@ -133,11 +132,11 @@
   width: 16px;
   height: 16px;
 }
+
 .iconStar {
   width: 16px;
   height: 16px;
   fill: #ffc531;
-  /* stroke: 1.2px solid #ffc531; */
   margin-right: 8px;
 }
 
@@ -147,11 +146,21 @@
   cursor: pointer;
 }
 
+.iconHartFav {
+  width: 100%;
+  height: 100%;
+  stroke-width: 2px;
+  stroke: #f4c550;
+  fill: #f4c550 ;
+}
+
 .iconHart {
   width: 100%;
   height: 100%;
   stroke-width: 2px;
   stroke: #121417;
+  fill: #fff;
+  transition: fill 0.3s ease;
 }
 
 .languages,
@@ -199,6 +208,7 @@
 }
 
 .aboutTeacherText {
+  margin-top: 32px;
   margin-bottom: 32px;
   font-family: var(--font-family);
   font-weight: 400;

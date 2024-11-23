@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getTeachers } from "./operation";
+import { getTeachers } from "./operations";
 
 const teacherSlice = createSlice({
   name: "teachers",

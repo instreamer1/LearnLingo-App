@@ -3,7 +3,7 @@ import FilterSelector from "../../components/FilterSelector/FilterSelector";
 import TeacherCard from "../../components/TeacherCard/TeacherCard";
 import css from "./TeachersPage.module.css";
 import { useEffect, useState } from "react";
-import { getTeachers } from "../../redux/teacherSlice/operation";
+import { getTeachers } from "../../redux/teacherSlice/operations";
 import {
   selectError,
   selectLastKey,
@@ -35,13 +35,15 @@ const TeachersPage = () => {
 
   return (
     <>
-      <section className={css.filters} >
+      <section className={css.filters}>
         <div className={css.container}>
           <FilterSelector />
         </div>
       </section>
       <section className={css.teacher}>
         <div className={css.container}>
+          {loading && list.length === 0 && <p>Loading...</p>}
+          {error && <p>Error: {error}</p>}
           <ul className={css.teachersList}>
             {list.map((teacher) => (
               <li

@@ -3,14 +3,14 @@ import LogInModal from "../LogInModal/LogInModal";
 import RegistrationModal from "../RegistrationModal/RegistrationModal";
 import { useState } from "react";
 import LogOut from "../LogOut/LogOut";
-import { isLoggedIn } from "../../auth-firebase/session";
+import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectIsLoggedIn } from "../../redux/userSlice/selectors";
 
 const AuthNav = () => {
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   const [logInModalIsOpen, setLogInModalIsOpen] = useState(false);
   const [registrationModalIsOpen, setRegistrationModalIsOpen] = useState(false);
-  const loggedIn = isLoggedIn();
- 
-
 
   const openLogInModal = () => {
     setLogInModalIsOpen(true);
@@ -29,10 +29,15 @@ const AuthNav = () => {
   };
 
   return (
-    <div className={css.authNav}>
-      {loggedIn ? (
-        <LogOut />
-       ) : ( 
+    <div className={isLoggedIn ? css.authNavLogIn : css.authNav}>
+      {isLoggedIn ? (
+        <>
+          <NavLink className={css.link} to="/favorites">
+            Favorites
+          </NavLink>
+          <LogOut />
+        </>
+      ) : (
         <>
           <button className={css.logIn} type="button" onClick={openLogInModal}>
             Log In
@@ -45,7 +50,7 @@ const AuthNav = () => {
             Registration
           </button>
         </>
-       )} 
+      )}
       <LogInModal modalIsOpen={logInModalIsOpen} closeModal={closeLogInModal} />
       <RegistrationModal
         modalIsOpen={registrationModalIsOpen}

@@ -1,0 +1,24 @@
+section {
+    background: #f8f8f8;
+    padding: 32px 0 32px;
+  }
+  
+  /* .filters {
+     padding: 20px 0 32px; 
+  } */
+  
+  .container {
+    padding-left: 128px;
+    padding-right: 128px;
+  }
+  
+  .favorites > .container{
+    display: flex;
+    flex-direction: column;
+  }
+  .teachersList {
+    display: flex;
+    flex-direction: column;
+    row-gap: 32px;
+    /* margin-bottom: 64px; */
+  }

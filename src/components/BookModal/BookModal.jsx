@@ -31,7 +31,7 @@ const bookTrialSchema = yup.object().shape({
     .required("Please select a reason for learning English!"),
 });
 
-const BookModal = ({ modalIsOpen, closeModal }) => {
+const BookModal = ({ modalIsOpen, closeModal, teacher  }) => {
   const {
     register,
     handleSubmit,
@@ -40,6 +40,12 @@ const BookModal = ({ modalIsOpen, closeModal }) => {
   } = useForm({
     resolver: yupResolver(bookTrialSchema),
   });
+
+  const {
+    avatar_url,
+    name,
+    surname,
+  } = teacher;
 
 //   const dispatch = useDispatch();
 
@@ -57,9 +63,6 @@ const BookModal = ({ modalIsOpen, closeModal }) => {
   return (
     <Modal isOpen={modalIsOpen} onClose={closeModal}>
       <div className={css.wrapper}>
-      {/* <button className={css.closeButton} onClick={closeModal}>
-        <BsXLg className={css.closeIcon} />
-      </button> */}
       <div className={css.firstWrapper}>
         <h2 className={css.bookTitle}>Book trial lesson</h2>
         <p className={css.bookDesc}>
@@ -69,14 +72,14 @@ const BookModal = ({ modalIsOpen, closeModal }) => {
         <div className={css.infoWrapper}>
           <div>
             <img
-              // src={avatarUrl}
-              alt="teacher avatar"
+              src={avatar_url}
+              alt={`${name} ${surname}`}
               className={css.avatar}
             />
           </div>
           <div>
             <span className={css.bookSpan}>Your teacher</span>
-            <h3 className={css.fullNameTitle}>{/* {fullName} */}</h3>
+            <h3 className={css.fullNameTitle}>{`${name} ${surname}`}</h3>
           </div>
         </div>
       </div>
@@ -112,7 +115,7 @@ const BookModal = ({ modalIsOpen, closeModal }) => {
               <input
                 type="text"
                 placeholder="Full Name"
-                // {...register("name")}
+                {...register("name")}
                 className={css.bookInput}
               />
               {errors.name && (

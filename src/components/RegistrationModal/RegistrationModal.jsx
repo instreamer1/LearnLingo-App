@@ -8,7 +8,7 @@ import Modal from "../Modal/Modal.jsx";
 import Button from "../Button/Button.jsx";
 import css from "./RegistrationModal.module.css";
 import { useDispatch } from "react-redux";
-import { registerUser } from "../../redux/userSlice/operation.js";
+import { registerUser } from "../../redux/userSlice/operations.js";
 
 const registrationSchema = yup.object().shape({
   name: yup.string().required("Name is required!"),
