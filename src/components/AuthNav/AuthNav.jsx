@@ -28,11 +28,16 @@ const AuthNav = () => {
     setRegistrationModalIsOpen(false);
   };
 
+
+  const buildLinkClass = ({ isActive }) => {
+    return `${css.link} ${isActive ? css.active : ""}`;
+  };
+
   return (
     <div className={isLoggedIn ? css.authNavLogIn : css.authNav}>
       {isLoggedIn ? (
         <>
-          <NavLink className={css.link} to="/favorites">
+          <NavLink className={buildLinkClass} to="/favorites">
             Favorites
           </NavLink>
           <LogOut />

@@ -2,21 +2,27 @@ import {
   doc,
   setDoc,
   updateDoc,
+  deleteDoc,
   arrayUnion,
   arrayRemove,
+  getDoc, collection, getDocs,
 } from "firebase/firestore";
-import { fetchSignInMethodsForEmail, getAuth } from "firebase/auth";
+// import { fetchSignInMethodsForEmail, getAuth } from "firebase/auth";
 import { firestore } from "./firebase";
-import { getDoc, collection, getDocs } from "firebase/firestore";
+;
+
+
 
 // Функция для сохранения профиля пользователя
 // Добавление документа в коллекцию 'users'
 export async function saveUserProfile(user) {
   try {
-    await setDoc(doc(firestore, "users", user.uid), {
+    const userRef = doc(firestore, "users", user.uid);
+    await setDoc(userRef, {
       name: user.name,
       email: user.email,
       createdAt: new Date(),
+      favorites: [], // Инициализация пустого массива избранных
     });
     console.log("User profile saved!");
   } catch (error) {
@@ -27,27 +33,34 @@ export async function saveUserProfile(user) {
 
 /**
  * Добавляет или удаляет учителя из списка избранных пользователя.
- * @param {string} userId - ID пользователя (uid).
- * @param {Object} teacher - Объект учителя { id, name, surname, avatar_url }.
- * @param {boolean} isFavorite - Указывает, является ли учитель уже избранным.
- *
- *
+
  */
+
+
+
+// export const toggleFavoriteTeacher = async (uid, teacher, isFavorite) => {
+//   try {
+//     const userRef = doc(firestore, "users", uid);
+//     const favoritesRef = doc(userRef, "favorites", teacher.id);
+
+//     if (isFavorite) {
+//       // Удалить из избранного
+//       await deleteDoc(favoritesRef);
+//     } else {
+//       // Добавить в избранное
+//       await setDoc(favoritesRef, { ...teacher });
+//     }
+//   } catch (error) {
+//     throw new Error("Error toggling favorite teacher: " + error.message);
+//   }
+// };
+
 export async function toggleFavoriteTeacher(uid, teacher, isFavorite) {
-  console.log("uid", uid);
   try {
     const userRef = doc(firestore, "users", uid);
 
     if (isFavorite) {
       // Удаление учителя из избранного
-      // await updateDoc(userRef, {
-      //   favorites: arrayRemove({
-      //     id: teacher.id,
-      //     name: teacher.name,
-      //     surname: teacher.surname,
-      //     avatar_url: teacher.avatar_url,
-      //   }),
-      // });
       await updateDoc(userRef, {
         favorites: arrayRemove(teacher),
       });
@@ -59,14 +72,6 @@ export async function toggleFavoriteTeacher(uid, teacher, isFavorite) {
       await updateDoc(userRef, {
         favorites: arrayUnion(teacher),
       });
-      // await updateDoc(userRef, {
-      //   favorites: arrayUnion({
-      //     id: teacher.id,
-      //     name: teacher.name,
-      //     surname: teacher.surname,
-      //     avatar_url: teacher.avatar_url,
-      //   }),
-      // });
       console.log(
         `Teacher ${teacher.name} ${teacher.surname} added to favorites.`
       );
@@ -77,21 +82,56 @@ export async function toggleFavoriteTeacher(uid, teacher, isFavorite) {
   }
 }
 
+/**
+ * Получает список избранных учителей пользователя.
+ * @param {string} uid - ID пользователя (uid).
+ * @returns {Array} Массив избранных учителей.
+ */
+
+// export async function getUserFavoriteTeachers(uid, token) {
+//   try {
+//     const userRef = doc(firestore, "users", uid);
+
+//     // Если токен используется для дополнительной валидации (например, через custom fetch)
+//     const options = {
+//       headers: {
+//         Authorization: `Bearer ${token}`,
+//       },
+//     };
+//     const userDoc = await getDoc(userRef, options);
+//     //const userDoc = await getDoc(userRef); // Firestore SDK автоматически управляет токенами
+//     if (userDoc.exists()) {
+//       const userData = userDoc.data();
+//       return userData.favorites || []; // Возвращаем массив избранных учителей
+//     } else {
+//       console.error(`No user document found for UID: ${uid}`);
+//       return [];
+//     }
+//   } catch (error) {
+//     console.error("Error fetching favorites:", error);
+//     throw error;
+//   }
+// }
+
+
+
+
+
 export async function getUserFavoriteTeachers(uid) {
   try {
-    const userRef = doc(firestore, "users", uid);
-    const userDoc = await getDoc(userRef);
+    const userRef = doc(firestore, "users", uid); // Ссылка на документ пользователя
+    const userDoc = await getDoc(userRef); // Получаем документ из Firestore
 
     if (userDoc.exists()) {
       const userData = userDoc.data();
-      return userData.favorites || []; // Возвращаем массив избранных учителей или пустой массив
+      return userData.favorites || []; // Возвращаем массив избранных учителей
     } else {
       console.error(`No user document found for UID: ${uid}`);
-      return [];
+      return []; // Если документ отсутствует, возвращаем пустой массив
     }
   } catch (error) {
     console.error("Error fetching favorites:", error);
-    throw error;
+    throw error; // Пробрасываем ошибку для обработки вызывающей стороной
   }
 }
 // Пояснения

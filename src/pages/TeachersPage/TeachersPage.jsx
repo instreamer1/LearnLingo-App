@@ -30,13 +30,13 @@ const TeachersPage = () => {
     dispatch(getTeachers({ pageSize, lastKey }));
   };
 
-  if (loading && list.length === 0) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
 
   return (
     <>
       <section className={css.filters}>
         <div className={css.container}>
+        {loading && (<p>Loading teachers...</p>)}
+        {error && (<p>Error loading teachers: {error}</p>)}
           <FilterSelector />
         </div>
       </section>

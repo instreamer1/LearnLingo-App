@@ -15,4 +15,5 @@
 
 .link.active {
   color: #121417;
+  text-decoration: underline;
 }

@@ -1,10 +1,8 @@
 import { NavLink } from "react-router-dom";
 import css from "./Navigation.module.css";
-import { isLoggedIn } from "../../auth-firebase/session";
 
 const Navigation = () => {
 
-  // const isAuthenticated = isLoggedIn();
   const buildLinkClass = ({ isActive }) => {
     return `${css.link} ${isActive ? css.active : ""}`;
   };

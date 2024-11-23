@@ -13,14 +13,16 @@ export const registerUser = createAsyncThunk(
       if (!response?.user) {
         throw new Error("Failed to register user. Invalid response.");
       }
+
       const user = {
         uid: response.user.uid,
         email: response.user.email,
         name,
         accessToken: await response.user.getIdToken(),
       };
-      startSession(response.user);
-      await saveUserProfile(user);
+
+      startSession(user); // Save session data after registration
+      await saveUserProfile(user); // Save user profile in Firestore
 
       return user;
     } catch (error) {
@@ -29,19 +31,6 @@ export const registerUser = createAsyncThunk(
     }
   }
 );
-
-// export const registerUser = createAsyncThunk(
-//   "user/register",
-//   async ({ email, password }, thunkAPI) => {
-//     try {
-//       const response = await createUser(email, password);
-//       startSession(response.user);
-//       return response.user;
-//     } catch (error) {
-//       return thunkAPI.rejectWithValue(error.message);
-//     }
-//   }
-// );
 
 // Async thunk for user login
 export const loginUser = createAsyncThunk(
@@ -54,7 +43,8 @@ export const loginUser = createAsyncThunk(
         email: response.user.email,
         accessToken: await response.user.getIdToken(),
       };
-      startSession(response.user);
+
+      startSession(user); // Save session data after login
       return user;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

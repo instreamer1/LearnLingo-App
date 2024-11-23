@@ -6,10 +6,15 @@ import BookModal from "../BookModal/BookModal";
 import toast from "react-hot-toast";
 
 import { selectIsLoggedIn, selectUid } from "../../redux/userSlice/selectors";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleFavoriteTeacher } from "../../auth-firebase/firestore";
+import {
+  addFavorite,
+  removeFavorite,
+} from "../../redux/favoritesSlice/slice";
 
 const TeacherCard = ({ teacher }) => {
+  const dispatch = useDispatch();
   const uid = useSelector(selectUid);
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
@@ -34,62 +39,42 @@ const TeacherCard = ({ teacher }) => {
   const [showReadMore, setShowReadMore] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
-  // const userRef = uid ? doc(firestore, "users", uid) : null;
-  // console.log("uid TeacherCard", uid);
+  useEffect(() => {
+    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    setIsFavorite(favorites.includes(id));
+  }, [id]);
 
-  // Обработчик клика на "Добавить/Удалить из избранного"
-const handleFavoriteClick = async () => {
-  console.log("uid TeacherCard", uid);
-  if (!isLoggedIn) {
-    toast.error("Please log in to add teachers to favorites.");
-    return;
-  }
 
-  try {
-    await toggleFavoriteTeacher(uid, teacher, isFavorite);
-    setIsFavorite(!isFavorite); // Обновить локальное состояние
-  } catch (error) {
-    console.log(error.message);
-    toast.error("An error occurred while updating favorites.");
-  }
-};
+  const handleFavoriteClick = async () => {
+    if (!isLoggedIn) {
+      toast.error("Please log in to add teachers to favorites.");
+      return;
+    }
+    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    if (isFavorite) {
+   
+      const updatedFavorites = favorites.filter((favId) => favId !== id);
+      localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+    } else {
 
-  // useEffect(() => {
-  //   if (userRef) {
-  //     const unsubscribe = onSnapshot(userRef, (snapshot) => {
-  //       const data = snapshot.data();
-  //       if (data?.favorites) {
-  //         setIsFavorite(data.favorites.some((fav) => fav.id === teacher.id));
-  //       }
-  //     });
-  //     return unsubscribe; // Cleanup on unmount
-  //   }
-  // }, [userRef, teacher.id]);
+      favorites.push(id);
+      localStorage.setItem("favorites", JSON.stringify(favorites));
+    }
 
-  // const handleFavoriteClick = async (e) => {
-  //   e.stopPropagation();
-  //   console.log("Autentith?", isLoggedIn);
-  //   if (!isLoggedIn) {
-  //     toast.error("Please log in to add teachers to favorites.");
-  //     return;
-  //   }
-
-  //   try {
-  //     await updateDoc(userRef, {
-  //       favorites: isFavorite
-  //         ? arrayRemove({ id, name, surname, avatar_url })
-  //         : arrayUnion({ id, name, surname, avatar_url }),
-  //     });
-  //     toast.success(
-  //       isFavorite
-  //         ? "Removed from favorites."
-  //         : "Added to favorites."
-  //     );
-  //   } catch (error) {
-  //     console.error("Error updating favorites:", error);
-  //     toast.error("An error occurred while updating favorites.");
-  //   }
-  // };
+    setIsFavorite((prev) => !prev);
+    try {
+      await toggleFavoriteTeacher(uid, teacher, isFavorite);
+      if (isFavorite) {
+        dispatch(removeFavorite(teacher)); 
+      } else {
+        dispatch(addFavorite(teacher)); 
+      }
+      setIsFavorite(!isFavorite); 
+    } catch (error) {
+      console.log(error.message);
+      toast.error("An error occurred while updating favorites.");
+    }
+  };
 
   const openModal = () => {
     setModalIsOpen(true);
@@ -99,9 +84,6 @@ const handleFavoriteClick = async () => {
     setModalIsOpen(false);
   };
 
-  // const handleClickReadMore = () => {
-  //   setShowReadMore((previous) => !previous);
-  // };
 
   return (
     <div className={css.card}>
@@ -148,17 +130,16 @@ const handleFavoriteClick = async () => {
 
             <button
               className={css.favoriteButton}
-              // {`${css.favoriteButton} ${
-              //   isFavorite ? css.iconHartFav : ""
-              // }`}
-
               onClick={handleFavoriteClick}
-              aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
+              aria-label={
+                isFavorite && isLoggedIn
+                  ? "Add to favorites"
+                  : "Remove from favorites"
+              }
             >
               <svg
                 className={
-                  isFavorite
-                  //  && isLoggedIn
+                  isFavorite && isLoggedIn
                     ? `${css.iconHartFav}`
                     : `${css.iconHart}`
                 }
@@ -194,7 +175,10 @@ const handleFavoriteClick = async () => {
             <span>No conditions specified</span>
           )}
         </p>
-        <button className={css.readMore} onClick={() => setShowReadMore((prev) => !prev)}>
+        <button
+          className={css.readMore}
+          onClick={() => setShowReadMore((prev) => !prev)}
+        >
           {showReadMore ? "Hide" : "Read more"}
         </button>
 
@@ -260,34 +244,3 @@ const handleFavoriteClick = async () => {
 };
 
 export default TeacherCard;
-
-// // Проверяем локальное хранилище при монтировании
-// useEffect(() => {
-//   const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-//   setIsFavorite(favorites.includes(id));
-// }, [id]);
-
-// // Обработчик клика по сердцу
-// const handleFavoriteClick = (e) => {
-//   e.stopPropagation();
-
-//   if (!isAuthenticated) {
-//     toast.success(
-//       "This functionality is available only to authorized users!"
-//     );
-//     return;
-//   }
-
-//   const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-//   if (isFavorite) {
-//     // Удаляем из избранного
-//     const updatedFavorites = favorites.filter((favId) => favId !== id);
-//     localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
-//   } else {
-//     // Добавляем в избранное
-//     favorites.push(id);
-//     localStorage.setItem("favorites", JSON.stringify(favorites));
-//   }
-
-//   setIsFavorite((prev) => !prev);
-// };

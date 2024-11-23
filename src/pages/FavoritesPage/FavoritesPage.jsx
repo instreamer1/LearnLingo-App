@@ -8,7 +8,6 @@ import {
 } from "../../redux/favoritesSlice/selectors";
 import { useEffect } from "react";
 import { fetchFavorites } from "../../redux/favoritesSlice/operations";
-import { getAuth } from "firebase/auth";
 import { selectIsLoggedIn, selectUid } from "../../redux/userSlice/selectors";
 
 function FavoritesPage() {
@@ -16,39 +15,34 @@ function FavoritesPage() {
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
   const dispatch = useDispatch();
-  // const auth = getAuth();
-  // const user = auth.currentUser;
   const uid = useSelector(selectUid);
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
   useEffect(() => {
-    if (isLoggedIn) {
+    if (isLoggedIn && uid) {
       dispatch(fetchFavorites(uid));
     }
   }, [dispatch, isLoggedIn, uid]);
 
-  if (loading) return <p>Loading favorites...</p>;
-  if (error) return <p>Error loading favorites: {error}</p>;
-
   return (
     <section className={css.favorites}>
       <div className={css.container}>
+        {loading && <p>Loading favorites...</p>}
+        {error && <p>Error loading favorites: {error}. Log out and log in again.</p>}
+        {!loading && favorites.length === 0 && !error && (
+          <p>No favorite teachers found.</p>
+        )}
+
         <ul className={css.teachersList}>
-          {favorites.length > 0 ? (
-            favorites.map((teacher) => (
-              <li
-                key={teacher.id}
-                id={teacher.id}
-                className={css.teachersListItem}
-              >
-                <TeacherCard
-                 key={teacher.id} teacher={teacher}
-                />
-              </li>
-            ))
-          ) : (
-            <p>No favorite teachers found.</p>
-          )}
+          {favorites.map((teacher) => (
+            <li
+              key={teacher.id}
+              id={teacher.id}
+              className={css.teachersListItem}
+            >
+              <TeacherCard teacher={teacher} />
+            </li>
+          ))}
         </ul>
       </div>
     </section>

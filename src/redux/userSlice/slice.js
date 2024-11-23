@@ -1,9 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {
-   startSession, getSession, endSession 
-} from "../../auth-firebase/session";
+import { startSession, getSession, endSession } from "../../auth-firebase/session";
 import { loginUser, registerUser } from "./operations";
 
+// Fetch saved session data from sessionStorage
 const savedSession = getSession();
 
 const userSlice = createSlice({
@@ -24,7 +23,7 @@ const userSlice = createSlice({
       state.name = null;
       state.accessToken = null;
       state.isLoggedIn = false;
-      endSession();
+      endSession(); 
     },
   },
   extraReducers: (builder) => {
@@ -34,6 +33,7 @@ const userSlice = createSlice({
         state.error = null;
       })
       .addCase(registerUser.fulfilled, (state, action) => {
+        console.log("registerUser", action.payload);
         state.loading = false;
         console.log(action.payload);
         state.uid = action.payload.uid;
@@ -41,7 +41,7 @@ const userSlice = createSlice({
         state.name = action.payload.name;
         state.accessToken = action.payload.accessToken;
         state.isLoggedIn = true;
-        startSession(action.payload);
+        startSession(action.payload); 
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.loading = false;
@@ -53,14 +53,14 @@ const userSlice = createSlice({
         state.error = null;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
-        // console.log("Login success:", action.payload);
+        console.log("Login success:", action.payload);
         state.loading = false;
         console.log(action.payload);
         state.uid = action.payload.uid;
         state.email = action.payload.email;
         state.accessToken = action.payload.accessToken;
         state.isLoggedIn = true;
-        startSession(action.payload);
+        startSession(action.payload); // Save user session data after login
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;

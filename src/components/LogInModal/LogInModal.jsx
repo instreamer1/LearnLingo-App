@@ -44,7 +44,7 @@ const LogInModal = ({ modalIsOpen, closeModal }) => {
       toast.success("Logged in successfully!");
       reset();
       closeModal();
-      navigate("/user");
+      navigate("/teachers");
     } catch (error) {
       console.error(error.message);
       setError(error.message);

@@ -1,24 +1,32 @@
 export const startSession = (user) => {
-  sessionStorage.setItem("uid", user.uid);
+  try {
+    sessionStorage.setItem("uid", user.uid);
     sessionStorage.setItem("email", user.email);
     sessionStorage.setItem("accessToken", user.accessToken);
+  } catch (error) {
+    console.error("Error saving session:", error);
+  }
+};
+
+export const getSession = () => {
+  return {
+    uid: sessionStorage.getItem("uid"),
+    email: sessionStorage.getItem("email"),
+    accessToken: sessionStorage.getItem("accessToken"),
   };
-  
-  export const getSession = () => {
-    return {
-      uid: sessionStorage.getItem("uid"),
-      email: sessionStorage.getItem("email"),
-      accessToken: sessionStorage.getItem("accessToken"),
-    };
-  };
-  
-  export const endSession = () => {
-    sessionStorage.removeItem("uid"),
+};
+
+export const endSession = () => {
+  try {
+    sessionStorage.removeItem("uid");
     sessionStorage.removeItem("email");
     sessionStorage.removeItem("accessToken");
-  };
-  
-  export const isLoggedIn = () => {
-    return !!getSession().accessToken;
-  };
-  
+  } catch (error) {
+    console.error("Error removing session:", error);
+  }
+};
+
+export const isLoggedIn = () => {
+  const session = getSession();
+  return !!session.accessToken;
+};
