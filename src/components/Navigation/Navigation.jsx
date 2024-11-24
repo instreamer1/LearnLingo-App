@@ -14,9 +14,6 @@ const Navigation = () => {
       <NavLink className={buildLinkClass} to="/teachers">
         Teachers
       </NavLink>
-    {/* { isAuthenticated && <NavLink className={buildLinkClass} to="/favorites">
-    Favorites
-      </NavLink>} */}
     </nav>
   );
 };

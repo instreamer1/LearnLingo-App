@@ -6,7 +6,6 @@ import AuthNav from "../AuthNav/AuthNav";
 const Header = () => {
   return (
     <>
-      <div className={css.header}>
         <div className={css.container}>
           <div className={css.logoContainer}>
             <img src={logo} alt="" className={css.logo} />
@@ -17,7 +16,6 @@ const Header = () => {
           </div>
           <AuthNav />
         </div>
-      </div>
     </>
   );
 };

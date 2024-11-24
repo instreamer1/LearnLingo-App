@@ -12,9 +12,9 @@ const LogOut = () => {
   const dispatch = useDispatch(); 
 
   const handleClickLogout = () => {
-    dispatch(logout()); // Обновляем состояние пользователя в Redux
-    endSession(); // Очищаем данные сессии
-    navigate("/login"); // Перенаправляем на страницу логина
+    dispatch(logout());
+    endSession();
+    navigate("/teachers"); 
   };
   return (
     <div>

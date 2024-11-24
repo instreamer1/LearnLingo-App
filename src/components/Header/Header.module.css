@@ -1,19 +1,7 @@
-.header {
-  /* display: grid;
-  grid-template-columns: 661px 1fr;
-  grid-template-columns: 1fr auto;
-  align-items: center; */
-  height: 48px;
-  padding-left: 128px;
-  padding-right: 128px;
-  margin-top: 20px;
-  /* margin-bottom: 20px; */
-  background: #fff;
-}
-
 .container {
   display: grid;
   grid-template-columns: 661px 1fr;
+  padding: 0 128px;
 }
 
 .logoContainer {
@@ -40,4 +28,3 @@
   letter-spacing: -0.02em;
   color: #121417;
 }
-

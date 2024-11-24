@@ -5,7 +5,7 @@ import css from "./Layout.module.css"
 const Layout = () => {
   return (
     <>
-      <header>
+      <header className={css.header}>
         <Header />
       </header>
 
