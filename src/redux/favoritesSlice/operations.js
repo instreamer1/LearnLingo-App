@@ -14,7 +14,7 @@ export const fetchFavorites = createAsyncThunk(
         accessToken,
       });
 
-      console.log("Fetched favoriteTeachers:", favoriteTeachers);
+     
 
       return favoriteTeachers;
     } catch (error) {

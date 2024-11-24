@@ -173,60 +173,7 @@
   }
   
   .btnWrapper {
-    /* position: relative; */
+ 
     margin-top: 40px;
   }
   
-  /* @media screen and (min-width: 768px) {
-    .modal {
-      width: 600px;
-      padding: 64px;
-    }
-  
-    .closeButton {
-      top: 20px;
-      right: 20px;
-      width: 32px;
-      height: 32px;
-    }
-  
-    .closeIcon {
-      width: 32px;
-      height: 32px;
-    }
-  
-    .bookTitle {
-      font-size: 40px;
-    }
-  
-    .formTitle {
-      font-size: 24px;
-    }
-  
-    .radioInput + .reasonDesc::before {
-      width: 24px;
-      height: 24px;
-    }
-  
-    .radioInput:checked + .reasonDesc::after {
-      left: 5.5px;
-      width: 13px;
-      height: 12px;
-    }
-  
-    .formWrapper {
-      margin-top: 40px;
-    }
-  
-    .radioInput + .reasonDesc {
-      padding-left: 36px;
-    }
-  
-    .radioWrapper {
-      margin-bottom: 40px;
-    }
-  
-    .btnWrapper {
-      margin-top: 40px;
-    }
-  } */

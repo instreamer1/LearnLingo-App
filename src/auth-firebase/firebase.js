@@ -37,33 +37,4 @@ export const signInUser = async (email, password) => {
 };
 
 
-// export const signInUser = async (email, password) => {
-//   const auth = getAuth(app);
-//   try {
-//     console.log("Attempting sign in with email:", email);
-//     const userCredential = await signInWithEmailAndPassword(auth, email, password);
-//     const user = userCredential?.user;
 
-//     if (!user) {
-//       throw new Error("User not found after sign-in");
-//     }
-
-//     console.log("User after sign-in:", user); // Логируем объект user
-
-//     // Проверка наличия email
-//     if (!user.email) {
-//       throw new Error("Email not found on user object");
-//     }
-
-//     const idToken = await user.getIdToken();
-//     console.log("Access token:", idToken);
-
-//     return {
-//       email: user.email,
-//       accessToken: idToken,
-//     };
-//   } catch (error) {
-//     console.error("Error signing in:", error);
-//     throw new Error(error.message || "Unknown error during sign-in");
-//   }
-// };

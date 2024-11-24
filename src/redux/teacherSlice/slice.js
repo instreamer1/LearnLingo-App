@@ -19,25 +19,20 @@ const teacherSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getTeachers.pending, (state) => {
-        console.log("Fetching teachers: pending...");
         state.loading = true;
         state.error = null;
       })
       .addCase(getTeachers.fulfilled, (state, action) => {
-        console.log(
-          "Fetching teachers: fulfilled with payload",
-          action.payload
-        );
         state.loading = false;
         const newTeachers = action.payload;
         state.teacherPage = newTeachers.length;
-        // state.teachers = [...state.teachers, ...newTeachers];
-       
-        const existingIds = new Set(state.teachers.map((teacher) => teacher.id)); 
-        const uniqueTeachers = newTeachers.filter(
-          (teacher) => !existingIds.has(teacher.id)
-        ); 
-        state.teachers = [...state.teachers, ...uniqueTeachers];
+        state.teachers = [...state.teachers, ...newTeachers];
+
+        // const existingIds = new Set(state.teachers.map((teacher) => teacher.id));
+        // const uniqueTeachers = newTeachers.filter(
+        //   (teacher) => !existingIds.has(teacher.id)
+        // );
+        // state.teachers = [...state.teachers, ...uniqueTeachers];
         //
         state.lastKey = newTeachers.length
           ? newTeachers[newTeachers.length - 1].id

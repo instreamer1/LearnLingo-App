@@ -71,7 +71,7 @@ const TeacherCard = ({ teacher }) => {
       }
       setIsFavorite(!isFavorite); 
     } catch (error) {
-      console.log(error.message);
+   
       toast.error("An error occurred while updating favorites.");
     }
   };

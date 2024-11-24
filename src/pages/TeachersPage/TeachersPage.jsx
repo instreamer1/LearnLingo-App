@@ -8,11 +8,11 @@ import {
   selectError,
   selectFilteredTeachers,
   selectLastKey,
-  selectList,
+  // selectList,
   selectLoading,
   selectTeacherPage,
 } from "../../redux/teacherSlice/selectors";
-import { selectLanguage, selectLevel, selectPrice } from "../../redux/filterSlice/selectors";
+
 
 const TeachersPage = () => {
 

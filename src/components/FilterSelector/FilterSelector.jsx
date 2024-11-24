@@ -1,7 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
 import css from "./FilterSelector.module.css";
-import { selectLanguage, selectLevel, selectPrice } from "../../redux/filterSlice/selectors";
-import { resetFilters, setLanguage, setLevel, setPrice } from "../../redux/filterSlice/slice";
+import {
+  selectLanguage,
+  selectLevel,
+  selectPrice,
+} from "../../redux/filterSlice/selectors";
+import {
+  resetFilters,
+  setLanguage,
+  setLevel,
+  setPrice,
+} from "../../redux/filterSlice/slice";
 import { getFilteredTeachers } from "../../redux/filterSlice/operations";
 
 const FilterSelector = () => {
@@ -10,16 +19,9 @@ const FilterSelector = () => {
   const level = useSelector(selectLevel);
   const price = useSelector(selectPrice);
 
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  // console.log(name, value);
-  //   dispatch(getFilteredTeachers({ [name]: value }));
-  // };
-
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    // Обновляем соответствующий фильтр в Redux
     if (name === "language") {
       dispatch(setLanguage(value));
     } else if (name === "level") {
@@ -28,14 +30,12 @@ const FilterSelector = () => {
       dispatch(setPrice(value));
     }
 
-    // Вызываем thunk для обновления списка учителей
     dispatch(getFilteredTeachers({ language, level, price, [name]: value }));
-    //  dispatch(getFilteredTeachers({ language: "English", level: "B1", maxPrice: 30 }));
   };
 
   const handleReset = () => {
-    dispatch(resetFilters()); // Сброс всех фильтров
-    dispatch(getFilteredTeachers({})); // Получение всех учителей без фильтров
+    dispatch(resetFilters()); 
+    dispatch(getFilteredTeachers({})); 
   };
 
   return (
@@ -43,7 +43,7 @@ const FilterSelector = () => {
       <div className={css.field}>
         <label className={css.label}>Languages</label>
         <select className={css.select} name="language" onChange={handleChange}>
-        {/* <option >change</option> */}
+          {/* <option >change</option> */}
           <option value="english">English</option>
           <option value="french">French</option>
           <option value="spanish">Spanish</option>
