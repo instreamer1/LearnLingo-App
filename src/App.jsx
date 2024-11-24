@@ -16,8 +16,10 @@ function App() {
           <Route index element={<HomePage />} />
           <Route path="/teachers" element={<TeachersPage />} />
           <Route path="/favorites" element={<FavoritesPage/>}/>
+          {/* <PrivateRoute path="/favorites" element={<FavoritesPage />} */}
+          <Route path="*" element={<Navigate to="/" />} />
         </Route>
-        <Route path="*" element={<Navigate to="/" />} />
+       
       </Routes>
       <Toaster />
       {/* <FileUpload /> */}
