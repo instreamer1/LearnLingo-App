@@ -18,10 +18,35 @@
 
 }
 
+
+
+
+/* @media screen and (min-width: 768px) {
+  #root {
+    width: 768px;
+ 
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  #root {
+    width: 1440px;
+
+  }
+  
+}
+#root {
+
+  margin: 0 auto;
+} */
+
+
 #root {
   width: 1440px;
   margin: 0 auto;
 }
+
+
 
 body {
 

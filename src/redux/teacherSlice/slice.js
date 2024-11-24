@@ -4,7 +4,7 @@ import { getTeachers } from "./operations";
 const teacherSlice = createSlice({
   name: "teachers",
   initialState: {
-    list: [],
+    teachers: [],
     loading: false,
     error: null,
     lastKey: null,
@@ -12,7 +12,7 @@ const teacherSlice = createSlice({
   },
   reducers: {
     resetTeachers(state) {
-      state.list = [];
+      state.teachers = [];
       state.lastKey = null;
     },
   },
@@ -31,13 +31,13 @@ const teacherSlice = createSlice({
         state.loading = false;
         const newTeachers = action.payload;
         state.teacherPage = newTeachers.length;
-        // state.list = [...state.list, ...newTeachers];
+        // state.teachers = [...state.teachers, ...newTeachers];
        
-        const existingIds = new Set(state.list.map((teacher) => teacher.id)); 
+        const existingIds = new Set(state.teachers.map((teacher) => teacher.id)); 
         const uniqueTeachers = newTeachers.filter(
           (teacher) => !existingIds.has(teacher.id)
         ); 
-        state.list = [...state.list, ...uniqueTeachers];
+        state.teachers = [...state.teachers, ...uniqueTeachers];
         //
         state.lastKey = newTeachers.length
           ? newTeachers[newTeachers.length - 1].id

@@ -6,25 +6,29 @@ import { useEffect, useState } from "react";
 import { getTeachers } from "../../redux/teacherSlice/operations";
 import {
   selectError,
+  selectFilteredTeachers,
   selectLastKey,
   selectList,
   selectLoading,
   selectTeacherPage,
 } from "../../redux/teacherSlice/selectors";
-import { selectAccessToken } from "../../redux/userSlice/selectors";
+import { selectLanguage, selectLevel, selectPrice } from "../../redux/filterSlice/selectors";
 
 const TeachersPage = () => {
-  const loading = useSelector(selectLoading);
-  const list = useSelector(selectList);
+
+  const dispatch = useDispatch();
+  const loading= useSelector(selectLoading);
+  // const teachers = useSelector(selectList);
   const error = useSelector(selectError);
   const lastKey = useSelector(selectLastKey);
   const teacherPage = useSelector(selectTeacherPage);
-  const accessToken = useSelector(selectAccessToken);
-
-  console.log("accessToken", accessToken);
-  const dispatch = useDispatch();
-
   const [pageSize] = useState(4);
+  const teachers = useSelector(selectFilteredTeachers)
+
+  console.log("teachers", teachers);
+ 
+
+
 
   useEffect(() => {
     dispatch(getTeachers({ pageSize, lastKey: null }));
@@ -46,10 +50,10 @@ const TeachersPage = () => {
       </section>
       <section className={css.teacher}>
         <div className={css.container}>
-          {loading && list.length === 0 && <p>Loading...</p>}
+          {loading && teachers.length === 0 && <p>Loading...</p>}
           {error && <p>Error: {error}</p>}
           <ul className={css.teachersList}>
-            {list.map((teacher) => (
+            {teachers.map((teacher) => (
               <li
                 key={teacher.id}
                 id={teacher.id}
