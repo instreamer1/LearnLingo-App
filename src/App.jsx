@@ -4,10 +4,9 @@ import Layout from "./components/Layout/Layout";
 import HomePage from "./pages/HomePage/HomePage";
 import TeachersPage from "./pages/TeachersPage/TeachersPage";
 import { Toaster } from "react-hot-toast";
-import FileUpload from './components/FileUpload.jsx';
+import FileUpload from "./components/FileUpload.jsx";
 import FavoritesPage from "./pages/FavoritesPage/FavoritesPage.jsx";
 import PrivateRoute from "./pages/PrivateRoute.jsx";
-
 
 function App() {
   return (
@@ -19,20 +18,17 @@ function App() {
           {/* <Route path="/favorites" element={<FavoritesPage/>}/> */}
 
           <Route
-            path='favorites'  element={<PrivateRoute component={<FavoritesPage />}  redirectTo={'/teachers'}/>}
-            />
-          {/* <Route
-            path='contacts'
+            path="favorites"
             element={
               <PrivateRoute
-                component={<ContactsPage />}
-                redirectTo={'/login'}
+                component={<FavoritesPage />}
+                redirectTo={"/teachers"}
               />
             }
-          /> */}
+          />
+
           <Route path="*" element={<Navigate to="/" />} />
         </Route>
-       
       </Routes>
       <Toaster />
       {/* <FileUpload /> */}
