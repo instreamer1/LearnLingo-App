@@ -25,7 +25,6 @@ const TeachersPage = () => {
   const [pageSize] = useState(4);
   const teachers = useSelector(selectFilteredTeachers)
 
-  console.log("teachers", teachers);
  
 
 

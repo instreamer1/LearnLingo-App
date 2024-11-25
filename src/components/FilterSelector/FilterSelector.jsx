@@ -69,9 +69,9 @@ const FilterSelector = () => {
           <option value="35">35 $</option>
         </select>
       </div>
-      <button className={css.resetButton} onClick={handleReset}>
+      {/* <button className={css.resetButton} onClick={handleReset}>
         Reset Filters
-      </button>
+      </button> */}
     </div>
   );
 };

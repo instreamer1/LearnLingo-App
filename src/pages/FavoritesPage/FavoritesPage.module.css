@@ -1,14 +1,16 @@
 .favorites {
+  width: 380px;
     background: #f8f8f8;
     padding: 32px 0 32px;
+    margin: 0 auto;
   }
   
   
-  .container {
+  /* .container {
     padding-left: 128px;
     padding-right: 128px;
   }
-  
+   */
   .favorites > .container{
     display: flex;
     flex-direction: column;
@@ -19,3 +21,26 @@
     row-gap: 32px;
     /* margin-bottom: 64px; */
   }
+
+  @media screen and (min-width: 768px) {
+    .favorites{
+    width: 768px;
+  
+  }
+    .container {
+      padding-left: 60px;
+      padding-right: 60px;
+    }
+  }
+  @media screen and (min-width: 1440px) {
+    .favorites{
+      width: 1440px;
+    
+    }
+    .container {
+      padding-left: 128px;
+      padding-right: 128px;
+    }
+
+    }
+    

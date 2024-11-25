@@ -1,9 +1,10 @@
+/* @media only screen and (max-width: 375px) { */
 .card {
   display: flex;
+  flex-direction: column;
   gap: 48px;
   border-radius: 24px;
   padding: 24px;
-  /* width: 1184px; */
   min-height: 328px;
   background: #fff;
 }
@@ -40,12 +41,13 @@
 
 .cardBody {
   flex: 1;
-  /* width: 968px; */
+
 }
 
 .cardWrapper {
   display: flex;
-  height: 56px;
+ 
+  min-height: 56px;
   justify-content: space-between;
   margin-bottom: 32px;
 }
@@ -83,12 +85,14 @@
 
 .cardLessonWrapper {
   display: flex;
+  
   align-items: start;
   gap: 64px;
 }
 
 .cardLesson {
   display: flex;
+  flex-direction: column;
   gap: 16px;
 }
 
@@ -188,10 +192,17 @@
   color: #121417;
 }
 
+/* .tags {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+} */
 .tags {
   margin-top: 32px;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   gap: 8px;
 }
 
@@ -207,6 +218,8 @@
   color: #121417;
 }
 
+
+
 .aboutTeacherText {
   margin-top: 32px;
   margin-bottom: 32px;
@@ -218,7 +231,7 @@
 }
 
 .reviewsList {
-  width: 417px;
+  max-width: 417px;
 
   display: flex;
   flex-direction: column;
@@ -263,7 +276,7 @@
   width: 16px;
   height: 16px;
   fill: #ffc531;
-  /* stroke: 1.2px solid #ffc531; */
+
   margin-right: 8px;
 }
 
@@ -300,3 +313,648 @@
 .bookTrial:hover {
   background: #ffdc86;
 }
+
+
+
+
+/* } */
+
+
+ @media screen and (min-width: 768px) {
+  .card {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    border-radius: 24px;
+    padding: 20px;
+    min-height: 328px;
+    background: #fff;
+  }
+  
+  .avatarWrapper {
+    position: relative;
+    border: 3px solid #fbe9ba;
+    border-radius: 100px;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .avatarPhoto {
+    border-radius: 100px;
+    width: 96px;
+    object-fit: cover;
+  }
+  
+  .onlineStatus {
+    position: absolute;
+    top: 19px;
+    right: 23px;
+    transform: translate(50%);
+    background: #38cd3e;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    width: 12px;
+    height: 12px;
+    fill: #38cd3e;
+  }
+  
+  .cardBody {
+    flex: 1;
+    /* display: flex; */
+    /* width: 480px; */
+  
+  }
+  
+  .cardWrapper {
+    display: flex;
+    /* height: 56px; */
+    /* justify-content: space-between; */
+  
+    margin-bottom: 32px;
+  }
+  
+  .cardHeader {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 8px;
+    margin-right: 10px;
+  }
+  
+  .languages,
+  .speaks,
+  .lessonInfo,
+  .conditions {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    color: #8a8a89;
+  }
+  
+  .lessonInfo > span,
+  .conditions > span {
+    color: #121417;
+  }
+  
+  .name {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 100%;
+    color: #121417;
+  }
+  
+  .cardLessonWrapper {
+    display: flex;
+    width: 360px;
+    align-items: start;
+    gap: 4px;
+  }
+  
+  .cardLesson {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  
+  .cardItem {
+    display: flex;
+    align-items: center;
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    color: #121417;
+    position: relative;
+    padding-right: 16px;
+  }
+  
+  .cardItem:last-child {
+    padding-right: 0;
+  }
+  
+  .withLine::after {
+    content: "";
+    display: inline-block;
+    width: 2px;
+    height: 16px;
+    background-image: url("data:image/svg+xml,%3Csvg width='2' height='16' viewBox='0 0 2 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 0V16' stroke='%23121417' stroke-opacity='0.2'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  .iconBook {
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+  }
+  
+  .iconBook > use {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .iconStar {
+    width: 16px;
+    height: 16px;
+    fill: #ffc531;
+    margin-right: 8px;
+  }
+  
+  .favoriteButton {
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+  }
+  
+  .iconHartFav {
+    width: 100%;
+    height: 100%;
+    stroke-width: 2px;
+    stroke: #f4c550;
+    fill: #f4c550 ;
+  }
+  
+  .iconHart {
+    width: 100%;
+    height: 100%;
+    stroke-width: 2px;
+    stroke: #121417;
+    fill: #fff;
+    transition: fill 0.3s ease;
+  }
+  
+  .languages,
+  .speaks,
+  .lessonInfo {
+    margin-bottom: 8px;
+  }
+  .conditions {
+    margin-bottom: 16px;
+   
+  }
+  
+  .speaks span {
+    text-decoration: underline;
+    text-decoration-skip-ink: none;
+    color: #121417;
+  }
+  
+  .readMore {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    text-decoration: underline;
+    text-decoration-skip-ink: none;
+    color: #121417;
+  }
+  
+  .tags {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  .tag {
+    border: 1px solid rgba(18, 20, 23, 0.2);
+    border-radius: 35px;
+    padding: 8px 12px;
+    height: 32px;
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 114%;
+    color: #121417;
+    display: flex;
+    align-items: center;
+
+  }
+  
+  .aboutTeacherText {
+    margin-top: 32px;
+    margin-bottom: 32px;
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    color: #121417;
+  }
+  
+  .reviewsList {
+    width: 417px;
+  
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  
+  .reviewsListItem {
+    min-height: 84px;
+  }
+  .reviewsWrapper {
+    display: flex;
+  
+    width: 100px;
+    height: 44px;
+    margin-bottom: 16px;
+  }
+  
+  .reviewsPhoto {
+    width: 44px;
+    margin-right: 12px;
+  }
+  
+  .reviewsUser {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .reviewsUserName {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    color: #8a8a89;
+  }
+  
+  .reviewsUserStars {
+    display: flex;
+  }
+  
+  .iconReviewsStar {
+    width: 16px;
+    height: 16px;
+    fill: #ffc531;
+  
+    margin-right: 8px;
+  }
+  
+  .reviewsUserRating {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 129%;
+    color: #121417;
+  }
+  
+  .reviewsUserFeedback {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    color: #121417;
+  }
+  .bookTrial {
+    font-family: var(--font-family);
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 156%;
+    color: #121417;
+    border-radius: 12px;
+    padding: 16px 48px;
+    width: 232px;
+    height: 60px;
+    background: #f4c550;
+    margin-top: 32px;
+    transition: background 0.3s ease-in-out;
+  }
+  
+  .bookTrial:hover {
+    background: #ffdc86;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .card {
+    display: flex;
+    gap: 48px;
+    border-radius: 24px;
+    padding: 24px;
+    min-height: 328px;
+    background: #fff;
+  }
+  
+  .avatarWrapper {
+    position: relative;
+    border: 3px solid #fbe9ba;
+    border-radius: 100px;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .avatarPhoto {
+    border-radius: 100px;
+    width: 96px;
+    object-fit: cover;
+  }
+  
+  .onlineStatus {
+    position: absolute;
+    top: 19px;
+    right: 23px;
+    transform: translate(50%);
+    background: #38cd3e;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    width: 12px;
+    height: 12px;
+    fill: #38cd3e;
+  }
+  
+  .cardBody {
+    display: block;
+    flex: 1;
+   
+  }
+
+  
+  .cardWrapper {
+    display: flex;
+    height: 56px;
+    justify-content: space-between;
+    margin-bottom: 32px;
+    /* gap: 0px; */
+
+  }
+  
+  .cardHeader {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 8px;
+    margin-right: 0;
+    width: 390px;
+  }
+  
+  .languages,
+  .speaks,
+  .lessonInfo,
+  .conditions {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    color: #8a8a89;
+  }
+  
+  .lessonInfo > span,
+  .conditions > span {
+    color: #121417;
+  }
+  
+  .name {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 100%;
+    color: #121417;
+  }
+  /* .cardLessonWrapper {
+    display: flex;
+    width: 360px;
+    align-items: start;
+    gap: 4px;
+  } */
+  
+  /* .cardLesson {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  } */
+  
+  .cardLessonWrapper {
+    display: flex;
+    width: 100%;
+    align-items: start;
+    gap: 64px;
+  }
+  
+  .cardLesson {
+    display: flex;
+    flex-wrap:nowrap ;
+    gap: 16px;
+  }
+  
+  .cardItem {
+    display: flex;
+    align-items: center;
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    color: #121417;
+    position: relative;
+    padding-right: 16px;
+  }
+  
+  .cardItem:last-child {
+    padding-right: 0;
+  }
+  
+  .withLine::after {
+    content: "";
+    display: inline-block;
+    width: 2px;
+    height: 16px;
+    background-image: url("data:image/svg+xml,%3Csvg width='2' height='16' viewBox='0 0 2 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 0V16' stroke='%23121417' stroke-opacity='0.2'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  .iconBook {
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+  }
+  
+  .iconBook > use {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .iconStar {
+    width: 16px;
+    height: 16px;
+    fill: #ffc531;
+    margin-right: 8px;
+  }
+  
+  .favoriteButton {
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+  }
+  
+  .iconHartFav {
+    width: 100%;
+    height: 100%;
+    stroke-width: 2px;
+    stroke: #f4c550;
+    fill: #f4c550 ;
+  }
+  
+  .iconHart {
+    width: 100%;
+    height: 100%;
+    stroke-width: 2px;
+    stroke: #121417;
+    fill: #fff;
+    transition: fill 0.3s ease;
+  }
+  
+  .languages,
+  .speaks,
+  .lessonInfo {
+    margin-bottom: 8px;
+  }
+  .conditions {
+    margin-bottom: 16px;
+  }
+  
+  .speaks span {
+    text-decoration: underline;
+    text-decoration-skip-ink: none;
+    color: #121417;
+  }
+  
+  .readMore {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    text-decoration: underline;
+    text-decoration-skip-ink: none;
+    color: #121417;
+  }
+  
+  .tags {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+  }
+  
+  .tag {
+    border: 1px solid rgba(18, 20, 23, 0.2);
+    border-radius: 35px;
+    padding: 8px 12px;
+    height: 32px;
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 114%;
+    color: #121417;
+  }
+  
+  .aboutTeacherText {
+    margin-top: 32px;
+    margin-bottom: 32px;
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    color: #121417;
+  }
+  
+  .reviewsList {
+    width: 417px;
+  
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  
+  .reviewsListItem {
+    min-height: 84px;
+  }
+  .reviewsWrapper {
+    display: flex;
+  
+    width: 100px;
+    height: 44px;
+    margin-bottom: 16px;
+  }
+  
+  .reviewsPhoto {
+    width: 44px;
+    margin-right: 12px;
+  }
+  
+  .reviewsUser {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .reviewsUserName {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    color: #8a8a89;
+  }
+  
+  .reviewsUserStars {
+    display: flex;
+  }
+  
+  .iconReviewsStar {
+    width: 16px;
+    height: 16px;
+    fill: #ffc531;
+  
+    margin-right: 8px;
+  }
+  
+  .reviewsUserRating {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 129%;
+    color: #121417;
+  }
+  
+  .reviewsUserFeedback {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    color: #121417;
+  }
+  .bookTrial {
+    font-family: var(--font-family);
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 156%;
+    color: #121417;
+    border-radius: 12px;
+    padding: 16px 48px;
+    width: 232px;
+    height: 60px;
+    background: #f4c550;
+    margin-top: 32px;
+    transition: background 0.3s ease-in-out;
+  }
+  
+  
+} 

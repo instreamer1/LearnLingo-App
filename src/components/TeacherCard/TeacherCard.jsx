@@ -66,8 +66,10 @@ const TeacherCard = ({ teacher }) => {
       await toggleFavoriteTeacher(uid, teacher, isFavorite);
       if (isFavorite) {
         dispatch(removeFavorite(teacher)); 
+        toast.success("Remove teachers of favorites.");
       } else {
         dispatch(addFavorite(teacher)); 
+        toast.success("Add teachers to favorites.");
       }
       setIsFavorite(!isFavorite); 
     } catch (error) {

@@ -6,50 +6,44 @@
 
 :root {
   --font-family: "Roboto", sans-serif;
-  --primary-color: #F4C550;
-  --background-color: #FBE9BA;
-  --card-bg-color: #CBDED3;
-  --secondary-bg-color: #9FB7CE;
-  --highlight-color: #E0A39A;
-  --warning-color: #F0AA8D;
-  --border-color: #9FBAAE;
-  --shadow-color: #BFD6EA;
-  --accent-color: #F4C8BA;
-
+  --primary-color: #f4c550;
+  --background-color: #fbe9ba;
+  --card-bg-color: #cbded3;
+  --secondary-bg-color: #9fb7ce;
+  --highlight-color: #e0a39a;
+  --warning-color: #f0aa8d;
+  --border-color: #9fbaae;
+  --shadow-color: #bfd6ea;
+  --accent-color: #f4c8ba;
 }
 
+/* @media only screen and (max-width: 375px) {
+  #root {
+    width: 375px
+ 
+  }
+} */
 
-
-
-/* @media screen and (min-width: 768px) {
+@media screen and (min-width: 768px) {
   #root {
     width: 768px;
- 
   }
 }
 
 @media screen and (min-width: 1440px) {
   #root {
     width: 1440px;
-
+    
   }
+}
+
+#root {
   
-}
-#root {
-
-  margin: 0 auto;
-} */
-
-
-#root {
-  width: 1440px;
   margin: 0 auto;
 }
-
 
 
 body {
-
 }
 
 h1,
