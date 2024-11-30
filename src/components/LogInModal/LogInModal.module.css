@@ -1,7 +1,7 @@
 .wrapper {
-  width: 438px;
+  width: 320px;
   height: 100%;
- }
+}
 
 .logInTitle {
   font-weight: 500;
@@ -70,4 +70,10 @@
 
 .btnWrapper {
   margin-top: 40px;
+}
+
+@media screen and (min-width: 768px) {
+  .wrapper {
+    width: 438px;
+  }
 }

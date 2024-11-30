@@ -1,5 +1,5 @@
 .wrapper {
-  width: 472px;
+  width: 320px;
   height: 100%;
 }
 
@@ -146,4 +146,11 @@
 
 .btnWrapper {
   margin-top: 40px;
+}
+
+
+@media screen and (min-width: 768px) {
+  .wrapper {
+    width: 438px;
+  }
 }
