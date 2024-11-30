@@ -113,7 +113,7 @@ const TeachersPage = () => {
             )}
           </ul>
 
-          {!(teachersLoading || teachers.length === 0) && (
+          {!( language || level || price) && (
           <>
             {teacherPage === pageSize && !isLoadingMore && (
               <button className={css.btn} onClick={loadMore}>
