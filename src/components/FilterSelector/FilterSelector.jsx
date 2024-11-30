@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import css from "./FilterSelector.module.css";
 import {
+  selectAllLanguages,
   selectLanguage,
   selectLevel,
   selectPrice,
@@ -15,6 +16,8 @@ const FilterSelector = ({
   const language = useSelector(selectLanguage);
   const level = useSelector(selectLevel);
   const price = useSelector(selectPrice);
+  const allLanguages = useSelector(selectAllLanguages)
+  console.log(allLanguages);
 
   return (
     <div className={css.wrapper}>

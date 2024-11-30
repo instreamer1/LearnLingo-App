@@ -18,7 +18,6 @@ import {
   selectLevel,
   selectPrice,
 } from "../../redux/filterSlice/selectors";
-// import { getFilteredTeachers } from "../../redux/filterSlice/operations";
 import {
   resetFilters,
   setLanguage,
@@ -41,24 +40,19 @@ const TeachersPage = () => {
   const price = useSelector(selectPrice);
   const filtersLoading = useSelector(selectFiltersLoading);
   const [pageSize] = useState(4);
-  // const teachers = useSelector(selectFilteredTeachers)
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
 
-  // Первоначальная загрузка учителей
+
+
   useEffect(() => {
-    // Загружаем всех учителей
     dispatch(getTeachers({ pageSize, lastKey: null }));
-    dispatch(fetchTeachers()); // Загружаем в `filters` для фильтрации
+    dispatch(fetchTeachers()); 
   }, [dispatch, pageSize]);
 
-  //   useEffect(() => {
-  //   dispatch(getTeachers({ pageSize, lastKey: null }));
-  // }, [dispatch, pageSize]);
 
-  // Определяем, что рендерить
   const teachersToRender =
     language || level || price ? filteredTeachers : teachers;
   console.log(language || level || price);
-
 
   const handleResetFilters = () => {
     dispatch(resetFilters());
@@ -69,26 +63,26 @@ const TeachersPage = () => {
     dispatch(setLanguage(language));
   };
 
-  //
+
 
   const handleLevelChange = (level) => {
-    dispatch(setLevel(level)); // Вызываем action setLevel
+    dispatch(setLevel(level));
   };
 
   const handlePriceChange = (price) => {
-    dispatch(setPrice(price)); // Вызываем action setPrice
+    dispatch(setPrice(price)); 
   };
 
   const loadMore = () => {
+    setIsLoadingMore(true);
     dispatch(getTeachers({ pageSize, lastKey }));
+    setIsLoadingMore(false);
   };
 
   return (
     <>
       <section className={css.filters}>
         <div className={css.container}>
-          {(teachersLoading || filtersLoading) && <p>Loading teachers...</p>}
-          {error && <p>Error loading teachers: {error}</p>}
           <FilterSelector
             onLanguageChange={handleLanguageChange}
             onLevelChange={handleLevelChange}
@@ -99,41 +93,39 @@ const TeachersPage = () => {
       </section>
       <section className={css.teacher}>
         <div className={css.container}>
-          {/* {loading && teachers.length === 0 && <p>Loading...</p>}
-          {error && <p>Error: {error}</p>} */}
+    
+          {error && <p>Error: {error}</p>}
           <ul className={css.teachersList}>
-            {/* {teachers.map((teacher) => ( */}
-            {
-              // teachersLoading || filtersLoading ? (
-              //   <p>Loading...</p>
-              // ) :
-              teachersToRender.length > 0 ? (
-                teachersToRender.map((teacher) => (
-                  <li
-                    key={teacher.id}
-                    id={teacher.id}
-                    className={css.teachersListItem}
-                  >
-                    <TeacherCard teacher={teacher} />
-                  </li>
-                ))
-              ) 
-              : (
-                <p>No teachers found</p>
-              )
-            }
+            {teachersLoading && teachers.length === 0 ? (
+              <p>Loading...</p> 
+            ) : filtersLoading && filteredTeachers.length === 0 ? (
+              <p>Applying filters...</p> 
+            ) : teachersToRender.length > 0 ? (
+              teachersToRender.map((teacher) => (
+                <li
+                  key={teacher.id}
+                  id={teacher.id}
+                  className={css.teachersListItem}
+                >
+                  <TeacherCard teacher={teacher} />
+                </li>
+              ))
+            ) : (
+              <p>No teachers found</p> 
+            )}
           </ul>
 
-          {!(language || level || price) &&
-            (teachersLoading ? (
-              <p>Loading more...</p>
-            ) : (
-              teacherPage === pageSize && (
-                <button className={css.btn} onClick={loadMore}>
-                  Load More
-                </button>
-              )
-            ))}
+          {!(teachersLoading || teachers.length === 0) && (
+          <>
+            {teacherPage === pageSize && !isLoadingMore && (
+              <button className={css.btn} onClick={loadMore}>
+                Load More
+              </button>
+            )}
+            {isLoadingMore && <p>Loading more...</p>}
+          </>
+        )}
+
         </div>
       </section>
     </>

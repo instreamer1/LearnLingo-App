@@ -14,7 +14,6 @@ export const fetchTeachers = async ({ pageSize, lastKey = null }) => {
   const teacherQuery = query(
     ref(database, "teachers"),
     orderByChild("id"),
-    // startAt(lastKey || 0),
     lastKey ? startAfter(lastKey) : startAt(0),
     limitToFirst(pageSize)
   );
@@ -57,17 +56,7 @@ export const fetchAllTeachers = async () => {
     }
 
     return [];
-    // const snapshot = await get(teachersRef);
 
-    // if (!snapshot.exists()) {
-    //   return [];
-    // }
-
-    // const teachers = Object.keys(snapshot.val()).map((key) => ({
-    //   id: key,
-    //   ...snapshot.val()[key],
-    // }));
-    // return teachers;
   } catch (error) {
     console.error("Error fetching teachers:", error.message);
     throw error;

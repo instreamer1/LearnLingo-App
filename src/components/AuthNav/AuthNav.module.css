@@ -20,7 +20,6 @@
   font-size: 16px;
   line-height: 125%;
   color: #121417;
-  /* justify-self: end; */
 }
 
 .registration {
@@ -30,7 +29,6 @@
   line-height: 125%;
   color: #fff;
   border-radius: 12px;
-  /* padding: 14px 39px; */
   width: 100px;
   height: 48px;
   background: #121417;
@@ -79,7 +77,6 @@
     width: 166px;
     height: 48px;
     background: #121417;
-    /* justify-self: end; */
   }
   
 }
@@ -90,17 +87,4 @@
     gap: 16px;
   }
 
-  /* .registration {
-    font-family: var(--font-family);
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 125%;
-    color: #fff;
-    border-radius: 12px;
-    padding: 14px 39px;
-    width: 166px;
-    height: 48px;
-    background: #121417;
-   
-  } */
 }

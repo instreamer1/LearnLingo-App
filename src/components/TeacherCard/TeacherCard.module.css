@@ -1,4 +1,3 @@
-/* @media only screen and (max-width: 375px) { */
 .card {
   display: flex;
   flex-direction: column;
@@ -41,12 +40,11 @@
 
 .cardBody {
   flex: 1;
-
 }
 
 .cardWrapper {
   display: flex;
- 
+
   min-height: 56px;
   justify-content: space-between;
   margin-bottom: 32px;
@@ -85,7 +83,7 @@
 
 .cardLessonWrapper {
   display: flex;
-  
+
   align-items: start;
   gap: 64px;
 }
@@ -155,7 +153,7 @@
   height: 100%;
   stroke-width: 2px;
   stroke: #f4c550;
-  fill: #f4c550 ;
+  fill: #f4c550;
 }
 
 .iconHart {
@@ -192,12 +190,6 @@
   color: #121417;
 }
 
-/* .tags {
-  margin-top: 32px;
-  display: flex;
-  flex-direction: row;
-  gap: 8px;
-} */
 .tags {
   margin-top: 32px;
   display: flex;
@@ -217,8 +209,6 @@
   line-height: 114%;
   color: #121417;
 }
-
-
 
 .aboutTeacherText {
   margin-top: 32px;
@@ -314,13 +304,7 @@
   background: #ffdc86;
 }
 
-
-
-
-/* } */
-
-
- @media screen and (min-width: 768px) {
+@media screen and (min-width: 768px) {
   .card {
     display: flex;
     flex-direction: row;
@@ -330,7 +314,7 @@
     min-height: 328px;
     background: #fff;
   }
-  
+
   .avatarWrapper {
     position: relative;
     border: 3px solid #fbe9ba;
@@ -341,13 +325,13 @@
     align-items: center;
     justify-content: center;
   }
-  
+
   .avatarPhoto {
     border-radius: 100px;
     width: 96px;
     object-fit: cover;
   }
-  
+
   .onlineStatus {
     position: absolute;
     top: 19px;
@@ -360,22 +344,16 @@
     height: 12px;
     fill: #38cd3e;
   }
-  
+
   .cardBody {
     flex: 1;
-    /* display: flex; */
-    /* width: 480px; */
-  
   }
-  
+
   .cardWrapper {
     display: flex;
-    /* height: 56px; */
-    /* justify-content: space-between; */
-  
     margin-bottom: 32px;
   }
-  
+
   .cardHeader {
     display: flex;
     flex-direction: column;
@@ -383,7 +361,7 @@
     gap: 8px;
     margin-right: 10px;
   }
-  
+
   .languages,
   .speaks,
   .lessonInfo,
@@ -394,12 +372,12 @@
     line-height: 150%;
     color: #8a8a89;
   }
-  
+
   .lessonInfo > span,
   .conditions > span {
     color: #121417;
   }
-  
+
   .name {
     font-family: var(--font-family);
     font-weight: 500;
@@ -407,21 +385,21 @@
     line-height: 100%;
     color: #121417;
   }
-  
+
   .cardLessonWrapper {
     display: flex;
     width: 360px;
     align-items: start;
     gap: 4px;
   }
-  
+
   .cardLesson {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     gap: 16px;
   }
-  
+
   .cardItem {
     display: flex;
     align-items: center;
@@ -433,11 +411,11 @@
     position: relative;
     padding-right: 16px;
   }
-  
+
   .cardItem:last-child {
     padding-right: 0;
   }
-  
+
   .withLine::after {
     content: "";
     display: inline-block;
@@ -451,39 +429,39 @@
     top: 50%;
     transform: translateY(-50%);
   }
-  
+
   .iconBook {
     width: 16px;
     height: 16px;
     margin-right: 8px;
   }
-  
+
   .iconBook > use {
     width: 16px;
     height: 16px;
   }
-  
+
   .iconStar {
     width: 16px;
     height: 16px;
     fill: #ffc531;
     margin-right: 8px;
   }
-  
+
   .favoriteButton {
     width: 26px;
     height: 26px;
     cursor: pointer;
   }
-  
+
   .iconHartFav {
     width: 100%;
     height: 100%;
     stroke-width: 2px;
     stroke: #f4c550;
-    fill: #f4c550 ;
+    fill: #f4c550;
   }
-  
+
   .iconHart {
     width: 100%;
     height: 100%;
@@ -492,7 +470,7 @@
     fill: #fff;
     transition: fill 0.3s ease;
   }
-  
+
   .languages,
   .speaks,
   .lessonInfo {
@@ -500,15 +478,14 @@
   }
   .conditions {
     margin-bottom: 16px;
-   
   }
-  
+
   .speaks span {
     text-decoration: underline;
     text-decoration-skip-ink: none;
     color: #121417;
   }
-  
+
   .readMore {
     font-family: var(--font-family);
     font-weight: 500;
@@ -518,7 +495,7 @@
     text-decoration-skip-ink: none;
     color: #121417;
   }
-  
+
   .tags {
     margin-top: 32px;
     display: flex;
@@ -526,7 +503,7 @@
     flex-wrap: wrap;
     gap: 8px;
   }
-  
+
   .tag {
     border: 1px solid rgba(18, 20, 23, 0.2);
     border-radius: 35px;
@@ -539,9 +516,8 @@
     color: #121417;
     display: flex;
     align-items: center;
-
   }
-  
+
   .aboutTeacherText {
     margin-top: 32px;
     margin-bottom: 32px;
@@ -551,37 +527,37 @@
     line-height: 150%;
     color: #121417;
   }
-  
+
   .reviewsList {
     width: 417px;
-  
+
     display: flex;
     flex-direction: column;
     gap: 32px;
   }
-  
+
   .reviewsListItem {
     min-height: 84px;
   }
   .reviewsWrapper {
     display: flex;
-  
+
     width: 100px;
     height: 44px;
     margin-bottom: 16px;
   }
-  
+
   .reviewsPhoto {
     width: 44px;
     margin-right: 12px;
   }
-  
+
   .reviewsUser {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
   }
-  
+
   .reviewsUserName {
     font-family: var(--font-family);
     font-weight: 500;
@@ -589,19 +565,19 @@
     line-height: 150%;
     color: #8a8a89;
   }
-  
+
   .reviewsUserStars {
     display: flex;
   }
-  
+
   .iconReviewsStar {
     width: 16px;
     height: 16px;
     fill: #ffc531;
-  
+
     margin-right: 8px;
   }
-  
+
   .reviewsUserRating {
     font-family: var(--font-family);
     font-weight: 500;
@@ -609,7 +585,7 @@
     line-height: 129%;
     color: #121417;
   }
-  
+
   .reviewsUserFeedback {
     font-family: var(--font-family);
     font-weight: 500;
@@ -631,7 +607,7 @@
     margin-top: 32px;
     transition: background 0.3s ease-in-out;
   }
-  
+
   .bookTrial:hover {
     background: #ffdc86;
   }
@@ -646,7 +622,7 @@
     min-height: 328px;
     background: #fff;
   }
-  
+
   .avatarWrapper {
     position: relative;
     border: 3px solid #fbe9ba;
@@ -657,13 +633,13 @@
     align-items: center;
     justify-content: center;
   }
-  
+
   .avatarPhoto {
     border-radius: 100px;
     width: 96px;
     object-fit: cover;
   }
-  
+
   .onlineStatus {
     position: absolute;
     top: 19px;
@@ -676,23 +652,19 @@
     height: 12px;
     fill: #38cd3e;
   }
-  
+
   .cardBody {
     display: block;
     flex: 1;
-   
   }
 
-  
   .cardWrapper {
     display: flex;
     height: 56px;
     justify-content: space-between;
     margin-bottom: 32px;
-    /* gap: 0px; */
-
   }
-  
+
   .cardHeader {
     display: flex;
     flex-direction: column;
@@ -701,7 +673,7 @@
     margin-right: 0;
     width: 390px;
   }
-  
+
   .languages,
   .speaks,
   .lessonInfo,
@@ -712,12 +684,12 @@
     line-height: 150%;
     color: #8a8a89;
   }
-  
+
   .lessonInfo > span,
   .conditions > span {
     color: #121417;
   }
-  
+
   .name {
     font-family: var(--font-family);
     font-weight: 500;
@@ -725,32 +697,21 @@
     line-height: 100%;
     color: #121417;
   }
-  /* .cardLessonWrapper {
-    display: flex;
-    width: 360px;
-    align-items: start;
-    gap: 4px;
-  } */
-  
-  /* .cardLesson {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-  } */
-  
+
+
   .cardLessonWrapper {
     display: flex;
     width: 100%;
     align-items: start;
     gap: 64px;
   }
-  
+
   .cardLesson {
     display: flex;
-    flex-wrap:nowrap ;
+    flex-wrap: nowrap;
     gap: 16px;
   }
-  
+
   .cardItem {
     display: flex;
     align-items: center;
@@ -762,11 +723,11 @@
     position: relative;
     padding-right: 16px;
   }
-  
+
   .cardItem:last-child {
     padding-right: 0;
   }
-  
+
   .withLine::after {
     content: "";
     display: inline-block;
@@ -780,39 +741,39 @@
     top: 50%;
     transform: translateY(-50%);
   }
-  
+
   .iconBook {
     width: 16px;
     height: 16px;
     margin-right: 8px;
   }
-  
+
   .iconBook > use {
     width: 16px;
     height: 16px;
   }
-  
+
   .iconStar {
     width: 16px;
     height: 16px;
     fill: #ffc531;
     margin-right: 8px;
   }
-  
+
   .favoriteButton {
     width: 26px;
     height: 26px;
     cursor: pointer;
   }
-  
+
   .iconHartFav {
     width: 100%;
     height: 100%;
     stroke-width: 2px;
     stroke: #f4c550;
-    fill: #f4c550 ;
+    fill: #f4c550;
   }
-  
+
   .iconHart {
     width: 100%;
     height: 100%;
@@ -821,7 +782,7 @@
     fill: #fff;
     transition: fill 0.3s ease;
   }
-  
+
   .languages,
   .speaks,
   .lessonInfo {
@@ -830,13 +791,13 @@
   .conditions {
     margin-bottom: 16px;
   }
-  
+
   .speaks span {
     text-decoration: underline;
     text-decoration-skip-ink: none;
     color: #121417;
   }
-  
+
   .readMore {
     font-family: var(--font-family);
     font-weight: 500;
@@ -846,14 +807,14 @@
     text-decoration-skip-ink: none;
     color: #121417;
   }
-  
+
   .tags {
     margin-top: 32px;
     display: flex;
     flex-direction: row;
     gap: 8px;
   }
-  
+
   .tag {
     border: 1px solid rgba(18, 20, 23, 0.2);
     border-radius: 35px;
@@ -865,7 +826,7 @@
     line-height: 114%;
     color: #121417;
   }
-  
+
   .aboutTeacherText {
     margin-top: 32px;
     margin-bottom: 32px;
@@ -875,37 +836,37 @@
     line-height: 150%;
     color: #121417;
   }
-  
+
   .reviewsList {
     width: 417px;
-  
+
     display: flex;
     flex-direction: column;
     gap: 32px;
   }
-  
+
   .reviewsListItem {
     min-height: 84px;
   }
   .reviewsWrapper {
     display: flex;
-  
+
     width: 100px;
     height: 44px;
     margin-bottom: 16px;
   }
-  
+
   .reviewsPhoto {
     width: 44px;
     margin-right: 12px;
   }
-  
+
   .reviewsUser {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
   }
-  
+
   .reviewsUserName {
     font-family: var(--font-family);
     font-weight: 500;
@@ -913,19 +874,19 @@
     line-height: 150%;
     color: #8a8a89;
   }
-  
+
   .reviewsUserStars {
     display: flex;
   }
-  
+
   .iconReviewsStar {
     width: 16px;
     height: 16px;
     fill: #ffc531;
-  
+
     margin-right: 8px;
   }
-  
+
   .reviewsUserRating {
     font-family: var(--font-family);
     font-weight: 500;
@@ -933,7 +894,7 @@
     line-height: 129%;
     color: #121417;
   }
-  
+
   .reviewsUserFeedback {
     font-family: var(--font-family);
     font-weight: 500;
@@ -955,6 +916,4 @@
     margin-top: 32px;
     transition: background 0.3s ease-in-out;
   }
-  
-  
-} 
+}

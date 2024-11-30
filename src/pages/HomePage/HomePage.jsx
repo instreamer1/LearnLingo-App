@@ -33,7 +33,7 @@ function HomePage() {
             </button>
           </div>
           <div className={css.visualWrapper}>
-            <img src={photo}className={css.teacherPhoto} alt="teacherPhoto" className={css.teacherPhoto} />
+            <img src={photo}className={css.teacherPhoto} alt="teacherPhoto" />
           </div>
         </div>
         <div className={css.tutorsInfo}>

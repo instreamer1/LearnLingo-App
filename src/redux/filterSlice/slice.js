@@ -1,15 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchTeachers } from "./operations";
+import { applyFilters } from "./filters";
 
 const initialState = {
-  allTeachers: [], // Все учителя
-  filteredTeachers: [], // Отфильтрованные учителя
-  language: "",
+  allTeachers: [], 
+  filteredTeachers: [], 
   level: "",
   price: "",
   loading: false,
   error: null,
-
 };
 
 const changeFilter = createSlice({
@@ -36,7 +35,7 @@ const changeFilter = createSlice({
       state.language = "";
       state.level = "";
       state.price = "";
-      state.filteredTeachers = [...state.allTeachers]; // Показываем всех учителей
+      state.filteredTeachers = [...state.allTeachers]; 
     },
   },
   extraReducers: (builder) => {
@@ -49,7 +48,7 @@ const changeFilter = createSlice({
         state.loading = false;
         state.allTeachers = action.payload;
         console.log("state.allTeachers", state.allTeachers);
-        state.filteredTeachers = action.payload; // Изначально показываем всех
+        state.filteredTeachers = action.payload;
       })
       .addCase(fetchTeachers.rejected, (state, action) => {
         state.loading = false;
@@ -58,30 +57,7 @@ const changeFilter = createSlice({
   },
 });
 
-// Функция для применения фильтров
-const applyFilters = (state) => {
-  let teachers = [...state.allTeachers];
 
-  if (state.language) {
-    teachers = teachers.filter((teacher) =>
-      teacher.languages.some(
-        (lang) => lang.toLowerCase() === state.language.toLowerCase()
-      )
-    );
-  }
-
-  if (state.level) {
-    teachers = teachers.filter((teacher) =>
-      teacher.levels.some((lvl) => lvl.toLowerCase().startsWith(state.level.toLowerCase()))
-    );
-  }
-
-  if (state.price) {
-    teachers = teachers.filter((teacher) => teacher.price_per_hour >= state.price);
-  }
-
-  return teachers;
-};
 
 export const { setLanguage, setLevel, setPrice, resetFilters } = changeFilter.actions;
 export default  changeFilter.reducer;
