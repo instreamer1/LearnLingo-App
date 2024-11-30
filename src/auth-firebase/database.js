@@ -6,16 +6,17 @@ import {
   startAt,
   limitToFirst,
   equalTo,
+  startAfter,
 } from "firebase/database";
 import { database } from "./firebase";
-
 
 export const fetchTeachers = async ({ pageSize, lastKey = null }) => {
   const teacherQuery = query(
     ref(database, "teachers"),
-    orderByChild("id"), 
-    startAt(lastKey || 0), 
-    limitToFirst(pageSize) 
+    orderByChild("id"),
+    // startAt(lastKey || 0),
+    lastKey ? startAfter(lastKey) : startAt(0),
+    limitToFirst(pageSize)
   );
 
   try {
@@ -24,7 +25,6 @@ export const fetchTeachers = async ({ pageSize, lastKey = null }) => {
     if (snapshot.exists()) {
       const data = snapshot.val();
 
-    
       const teachers = Object.entries(data).map(([key, value]) => ({
         id: key,
         ...value,
@@ -33,46 +33,48 @@ export const fetchTeachers = async ({ pageSize, lastKey = null }) => {
       return teachers;
     }
 
-    return []; 
+    return [];
   } catch (error) {
     console.error("Error fetching teachers:", error.message);
     throw error;
   }
 };
 
-
 export const fetchAllTeachers = async () => {
   const teachersRef = ref(database, "teachers");
   try {
-  const snapshot = await get(teachersRef);
- 
-  if (!snapshot.exists()) {
+    const snapshot = await get(teachersRef);
+
+    if (snapshot.exists()) {
+      const data = snapshot.val();
+
+      const teachers = Object.entries(data).map(([key, value]) => ({
+        id: key,
+        ...value,
+      }));
+
+      return teachers;
+    }
+
     return [];
+    // const snapshot = await get(teachersRef);
+
+    // if (!snapshot.exists()) {
+    //   return [];
+    // }
+
+    // const teachers = Object.keys(snapshot.val()).map((key) => ({
+    //   id: key,
+    //   ...snapshot.val()[key],
+    // }));
+    // return teachers;
+  } catch (error) {
+    console.error("Error fetching teachers:", error.message);
+    throw error;
   }
-
-  const teachers = Object.keys(snapshot.val()).map((key) => ({
-    id: key,
-    ...snapshot.val()[key],
-  }));
-  return teachers;
-
-
-} catch (error) {
-  console.error("Error fetching teachers:", error.message);
-  throw error;
-}
 };
 
-
-
-
-
-
-
-
-
 export const fetchFilteredTeachers = async (filters) => {
-
   let teachersRef = ref(database, "teachers");
 
   if (filters.language) {
@@ -83,10 +85,9 @@ export const fetchFilteredTeachers = async (filters) => {
     );
   }
 
-
   const snapshot = await get(teachersRef);
   if (!snapshot.exists()) {
-    return []; 
+    return [];
   }
 
   const teachers = Object.keys(snapshot.val()).map((key) => ({
@@ -94,8 +95,5 @@ export const fetchFilteredTeachers = async (filters) => {
     ...snapshot.val()[key],
   }));
 
-
-    return teachers;
-
-  
+  return teachers;
 };
