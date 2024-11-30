@@ -2,6 +2,8 @@ import { useSelector } from "react-redux";
 import css from "./FilterSelector.module.css";
 import {
   selectAllLanguages,
+  selectAllLevels,
+  selectAllPrices,
   selectLanguage,
   selectLevel,
   selectPrice,
@@ -16,8 +18,9 @@ const FilterSelector = ({
   const language = useSelector(selectLanguage);
   const level = useSelector(selectLevel);
   const price = useSelector(selectPrice);
-  const allLanguages = useSelector(selectAllLanguages)
-  console.log(allLanguages);
+  const allLanguages = useSelector(selectAllLanguages);
+  const allLevels = useSelector(selectAllLevels);
+  const allPrices = useSelector(selectAllPrices);
 
   return (
     <div className={css.wrapper}>
@@ -26,42 +29,58 @@ const FilterSelector = ({
         <select
           className={css.select}
           name="language"
+          value={language}
           onChange={(e) => onLanguageChange(e.target.value)}
         >
-          <option value="">English</option>
-          <option value="english">English</option>
-          <option value="french">French</option>
-          <option value="spanish">Spanish</option>
-      
+          <option value="" >
+            Language
+          </option>
+          {allLanguages.map((languageOption, index) => (
+            <option key={index} value={languageOption}>
+              {languageOption}
+            </option>
+          ))}
         </select>
       </div>
+
       <div className={css.field}>
         <label className={css.label}>Level of knowledge</label>
         <select
           className={css.select}
           name="level"
+          value={level}
           onChange={(e) => onLevelChange(e.target.value)}
         >
-          <option value="a1">A1 Beginner</option>
-          <option value="a2">A2 Elementary</option>
-          <option value="b1">B1 Intermediate</option>
-          <option value="b2">B2 Upper Intermediate</option>
-          <option value="c1">C1 Advanced</option>
-          <option value="c2">C2 Proficient</option>
+          <option value="" >
+            Level
+          </option>
+          {allLevels.map((levelOption, index) => (
+            <option key={index} value={levelOption}>
+              {levelOption}
+            </option>
+          ))}
         </select>
       </div>
+
       <div className={css.field}>
         <label className={css.label}>Price</label>
         <select
           className={css.select}
           name="price"
+          value={price || ""}
           onChange={(e) => onPriceChange(Number(e.target.value))}
         >
-          <option value="25">25 $</option>
-          <option value="30">30 $</option>
-          <option value="35">35 $</option>
+          <option value="" >
+            Price
+          </option>
+          {allPrices.map((priceOption, index) => (
+            <option key={index} value={priceOption}>
+              {`${priceOption} $`}
+            </option>
+          ))}
         </select>
       </div>
+
       <div className={css.field}>
         {(language || level || price) && (
           <button className={css.resetButton} onClick={onReset}>

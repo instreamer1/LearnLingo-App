@@ -7,7 +7,6 @@ export const fetchTeachers = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const teachers = await fetchAllTeachers();
-      console.log("Filtered Teachers in Thunk:", teachers);
       return teachers;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

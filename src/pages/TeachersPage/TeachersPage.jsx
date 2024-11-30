@@ -34,7 +34,6 @@ const TeachersPage = () => {
   const lastKey = useSelector(selectLastKey);
   const teacherPage = useSelector(selectTeacherPage);
   const filteredTeachers = useSelector(selectFilteredTeachers);
-  console.log("filteredTeachers", filteredTeachers);
   const language = useSelector(selectLanguage);
   const level = useSelector(selectLevel);
   const price = useSelector(selectPrice);
@@ -52,7 +51,6 @@ const TeachersPage = () => {
 
   const teachersToRender =
     language || level || price ? filteredTeachers : teachers;
-  console.log(language || level || price);
 
   const handleResetFilters = () => {
     dispatch(resetFilters());

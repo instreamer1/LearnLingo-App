@@ -47,7 +47,6 @@ const changeFilter = createSlice({
       .addCase(fetchTeachers.fulfilled, (state, action) => {
         state.loading = false;
         state.allTeachers = action.payload;
-        console.log("state.allTeachers", state.allTeachers);
         state.filteredTeachers = action.payload;
       })
       .addCase(fetchTeachers.rejected, (state, action) => {

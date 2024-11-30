@@ -26,16 +26,8 @@ const teacherSlice = createSlice({
         state.loading = false;
         const newTeachers = action.payload;
         state.teacherPage = newTeachers.length;
-        // state.teachers = [...state.teachers, ...newTeachers];
+        state.teachers = [...state.teachers, ...newTeachers];
 
-        const existingIds = new Set(state.teachers.map((teacher) => teacher.id));
-        const uniqueTeachers = newTeachers.filter(
-          (teacher) => !existingIds.has(teacher.id)
-        );
-        state.teachers = [...state.teachers, ...uniqueTeachers];
-        
-        console.log("action.payload", action.payload);
-        console.log("state.lastKey",state.lastKey);
         state.lastKey = newTeachers.length
           ? newTeachers[newTeachers.length - 1 ].id
           : null;
