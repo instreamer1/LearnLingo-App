@@ -14,7 +14,6 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
           <Route path="/teachers" element={<TeachersPage />} />
-
           <Route
             path="favorites"
             element={
@@ -24,7 +23,6 @@ function App() {
               />
             }
           />
-
           <Route path="*" element={<Navigate to="/" />} />
         </Route>
       </Routes>

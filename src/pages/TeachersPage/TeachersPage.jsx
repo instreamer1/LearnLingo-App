@@ -57,7 +57,6 @@ const TeachersPage = () => {
     dispatch(getTeachers({ pageSize, lastKey: null }));
   };
   const handleLanguageChange = (language) => {
-    console.log("Selected language:", language);
     dispatch(setLanguage(language));
   };
 

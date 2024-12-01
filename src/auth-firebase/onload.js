@@ -1,7 +1,7 @@
-import { db, ref, push, set } from "./firebase";
+
 
 const handleFileUpload = (event) => {
-    console.log("Файл выбран", event.target.files);  
+    console.log("File selected", event.target.files);  
     const file = event.target.files[0];
     if (file && file.type === 'application/json') {
       const reader = new FileReader();
@@ -13,17 +13,17 @@ const handleFileUpload = (event) => {
          
         
         } catch (error) {
-          console.error('Ошибка обработки данных JSON:', error);
+          console.error('Error processing JSON data:', error);
         }
       };
   
       reader.onerror = (error) => {
-        console.error('Ошибка чтения файла:', error);
+        console.error('Error reading file:', error);
       };
   
       reader.readAsText(file);
     } else {
-      console.error('Пожалуйста, загрузите файл в формате JSON.');
+      console.error('Please upload the file in JSON format.');
     }
   };
   

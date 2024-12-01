@@ -17,14 +17,10 @@ const changeFilter = createSlice({
   reducers: {
     setLanguage: (state, action) => {
       state.language = action.payload;
-      console.log("setLanguage action payload:", action.payload);
-      console.log("Updated state.language:", state.language);
       state.filteredTeachers = applyFilters(state); 
     },
     setLevel: (state, action) => {
       state.level = action.payload;
-      console.log("setLanguage action payload:", action.payload);
-      console.log(action.payload);
       state.filteredTeachers = applyFilters(state);
     },
     setPrice: (state, action) => {
