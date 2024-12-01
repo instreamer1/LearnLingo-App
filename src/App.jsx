@@ -1,15 +1,17 @@
 import "./App.css";
 import { Navigate, Route, Routes } from "react-router-dom";
-import Layout from "./components/Layout/Layout";
-import HomePage from "./pages/HomePage/HomePage";
-import TeachersPage from "./pages/TeachersPage/TeachersPage";
 import { Toaster } from "react-hot-toast";
-import FavoritesPage from "./pages/FavoritesPage/FavoritesPage.jsx";
-import PrivateRoute from "./pages/PrivateRoute.jsx";
-
+import { lazy, Suspense } from "react";
+const Layout = lazy(() => import("./components/Layout/Layout"));
+const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
+const TeachersPage = lazy(() => import("./pages/TeachersPage/TeachersPage"));
+const FavoritesPage = lazy(() =>
+  import("./pages/FavoritesPage/FavoritesPage.jsx")
+);
+const PrivateRoute = lazy(() => import("./pages/PrivateRoute.jsx"));
 function App() {
   return (
-    <>
+    <Suspense fallback={<div className="loading">Loading...</div>}>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
@@ -17,17 +19,16 @@ function App() {
           <Route
             path="favorites"
             element={
-              <PrivateRoute
-                component={<FavoritesPage />}
-                redirectTo={"/teachers"}
-              />
+              <PrivateRoute redirectTo="/teachers">
+                <FavoritesPage />
+              </PrivateRoute>
             }
           />
           <Route path="*" element={<Navigate to="/" />} />
         </Route>
       </Routes>
       <Toaster />
-    </>
+    </Suspense>
   );
 }
 

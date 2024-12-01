@@ -1,5 +1,6 @@
 import Header from "../Header/Header";
 import { Outlet } from "react-router-dom";
+import { Suspense } from "react";
 import css from "./Layout.module.css";
 
 const Layout = () => {
@@ -10,7 +11,9 @@ const Layout = () => {
       </header>
 
       <main>
-        <Outlet />
+        <Suspense fallback={<div>Loading page...</div>}>
+          <Outlet />
+        </Suspense>
       </main>
     </>
   );
